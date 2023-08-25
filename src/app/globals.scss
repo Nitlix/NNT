@@ -1,0 +1,56 @@
+:root {
+    --spacing: 5rem;
+    --letter-spacing-multiplier: -0.05;
+}
+
+
+._nitlix {
+    >* {
+        padding-left: var(--spacing);
+        padding-right: var(--spacing);
+    }
+}
+
+body {
+    color: var(--primary);
+    background: var(--back);
+}
+
+h1, h2, h3, h4, h5, p, span, a {
+    letter-spacing: calc(var(--font-size) * var(--letter-spacing-multiplier));
+    font-size: var(--font-size);
+}
+
+h1 {
+    --font-size: 4rem;
+}
+
+h2 {
+    --font-size: 3rem;
+}
+
+h3 {
+    --font-size: 2rem;
+}
+
+h4 {
+    --font-size: 1.5rem;
+}
+
+h5 {
+    --font-size: 1.25rem;
+}
+
+p {
+    --font-size: 1rem;
+    color: var(--secondary);
+}
+    
+a {
+    text-decoration: none;
+}
+
+button {
+    outline: none;
+    border: none;
+}

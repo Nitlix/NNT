@@ -1,8 +1,9 @@
+import NAME from "../var/NAME"
+
 export default function(overrides={}){
-    
     const data = {
-        title: 'App',
-        description: 'A new app generated with the default Nitlix Next.JS App Router Template.',
+        title: NAME,
+        description: 'A new pre-packed nitlix app.',
         site_name: 'Nitlix',
         theme: {
             color: '#FFFFFF',
@@ -18,8 +19,18 @@ export default function(overrides={}){
         type: 'website',
         url: 'https://www.nitlix.pro',
         keywords: [],
+        twitter: {
+            creator: {
+                id: "1334566862479380480",
+                tag: "@nitlixis",
+            },
+            site: "1334566862479380480",
+            card: "summary_large_image",
+
+        },
         ...overrides
     }
+
 
     return {
         title: data.title,
@@ -32,8 +43,8 @@ export default function(overrides={}){
             images: data.images,
             url: data.url,
             site_name: data.site_name,
-            color: data.theme.color,
         },
+        themeColor: data.theme.color,
         robots: {
             index: false,
             follow: true,
@@ -46,6 +57,17 @@ export default function(overrides={}){
                 'max-image-preview': 'large',
                 'max-snippet': -1,
             },
+        },
+        twitter: {
+            card: data.twitter.card,
+            title: data.title,
+            description: data.description,
+            siteId: data.twitter.site,
+            creator: data.twitter.creator.tag,
+            creatorId: data.twitter.creator.id,
+            images: data.images.map((image) => {
+                return image.url
+            }),
         }
     }
 }

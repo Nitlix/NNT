@@ -1,7 +1,6 @@
 "use client";
-
-import React from "react";
-
+import { useEffect } from "react";
+import MAIN from "@/var/main"
 
 const allowed_themes = ["dark", "light", "system"]
 const default_theme = "dark";
@@ -40,13 +39,12 @@ function applyTheme(){
 
 export default function({children, className=""}){
     //inject theme based on localhost parameter
-
-    React.useEffect(()=>{
+    useEffect(()=>{
         applyTheme();
     },[])
 
     return <body className={`${className}`}>
-        <main className="_nitlix">
+        <main className={MAIN}>
             {children}
         </main>
     </body>

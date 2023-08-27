@@ -17,8 +17,10 @@ body {
 }
 
 h1, h2, h3, h4, h5, p, span, a {
+    --line-height: 1.1;
     letter-spacing: calc(var(--font-size) * var(--letter-spacing-multiplier));
     font-size: var(--font-size);
+    line-height: var(--line-height);
 }
 
 h1 {

@@ -28,6 +28,9 @@ export const metadata = metaGen();
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
+            <head>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.7/css/boxicons.min.css"/>
+            </head>
             <ServerProvider className={inter.className}>
                 {children}
             </ServerProvider>

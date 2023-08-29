@@ -27,6 +27,7 @@ import languageSettings from "@/i18n/settings"
 // =====================
 import metaGen from '@/modules/metaGen'
 import firstThemeHandler from '@/modules/firstThemeHandler'
+import getLoader from '@/auth/getLoader'
 export const metadata = metaGen();
 
 // =====================
@@ -41,7 +42,7 @@ export default function RootLayout({ children }) {
             <head>
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
-            <Provider className={inter.className} handlerData={handlerData} language={language}>
+            <Provider className={inter.className} handlerData={handlerData} language={language} authData={getLoader()}>
                 {children}
             </Provider>
         </html>

@@ -4,6 +4,9 @@ import { geolocation } from '@vercel/edge';
 import routes from "@/i18n/routes"
 import translations from "@/i18n/translations"
 
+import themeSettings from "@/themes/settings"
+
+
 
 
 export default function middleware(request) {
@@ -13,6 +16,8 @@ export default function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-url', request.url);
 
+
+    
     //==========================
     // Create response object
     //==========================
@@ -22,6 +27,8 @@ export default function middleware(request) {
             headers: requestHeaders,
         }
     });
+
+
 
     //====================
     // Language setting
@@ -39,13 +46,46 @@ export default function middleware(request) {
             lang = routes.default;
         }
 
-        response.cookies.set('lang', lang);
+        request.cookies.set('lang', lang);
     }
-    response.headers.set('x-lang', lang);
-     
+    request.headers.set('x-lang', lang);
+
+
+
+    //====================
+    // Theme setting
+    //====================
+    let theme = request.cookies.get('theme');
+    if (theme) {
+        theme = theme.value.toLowerCase();
+    }
+
+    if (!themeSettings.allowed.includes(theme)) {
+        console.log('Theme not allowed');
+        request.cookies.set('theme', themeSettings.default);
+    }
+
+
+
+
+
+
+
     //===================================
     // Return response to the renderer
     // It'll handle it from here
     //===================================
-    return response;
+    return NextResponse.next({
+        request: {
+            // Apply new request headers
+            headers: request.headers,
+            // Apply new request cookies
+            cookies: request.cookies,
+        }
+    });
 }
+
+export const config = {
+    // matcher solution for public, api, assets and _next exclusion
+    matcher: "/((?!api|static|.*\\..*|_next).*)",
+  };

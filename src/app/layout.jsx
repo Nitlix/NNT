@@ -16,14 +16,15 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 // =====================
-// React Imports
+// Next Imports
 // =====================
-import ServerProvider from '@/components/Provider/ServerProvider'
-import metaGen from '@/modules/metaGen'
+import { cookies } from 'next/headers'
+import ClientProvider from "@/components/Provider/ClientProvider"
 
 // =====================
 // Metadata Export
 // =====================
+import metaGen from '@/modules/metaGen'
 export const metadata = metaGen();
 
 // =====================
@@ -35,9 +36,9 @@ export default function RootLayout({ children }) {
             <head>
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
-            <ServerProvider className={inter.className}>
+            <ClientProvider className={inter.className} serverTheme={cookies().get("theme").value}>
                 {children}
-            </ServerProvider>
+            </ClientProvider>
         </html>
     )
 }

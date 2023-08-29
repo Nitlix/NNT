@@ -14,15 +14,27 @@ function check(theme){
             //check system theme
             const system_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
             if (system_theme === "dark"){
-                return "dark";
+                return {
+                    apply: "dark",
+                    store: "system"
+                }
             }
-            return "light";
+            return {
+                apply: "light",
+                store: "system"
+            }
         }
 
-        return theme;
+        return {
+            apply: theme,
+            store: theme
+        }
     }
     else {
-        return defaultTheme;
+        return {
+            apply: defaultTheme,
+            store: defaultTheme
+        }
     }
 }
 
@@ -30,16 +42,17 @@ function check(theme){
 function applyTheme(theme){
     const body = document.querySelector("body");
     const parsedTheme = check(theme);
+    console.log("🚀 ~ file: ClientProvider.jsx:45 ~ applyTheme ~ parsedTheme:", parsedTheme)
 
     body.classList.remove("dark", "light");
-    body.classList.add(parsedTheme);
+    body.classList.add(parsedTheme.apply);
 
-    localStorage.setItem("theme", parsedTheme);
-    document.cookie = `theme=${parsedTheme};path=/;max-age=31536000`;
+    document.cookie = `theme=${parsedTheme.store};path=/;max-age=31536000`;
 }
 
 
 export default function({children, className="", serverTheme=""}){
+    console.log("🚀 ~ file: ClientProvider.jsx:55 ~ function ~ serverTheme:", serverTheme)
     const [theme, setTheme] = useState(serverTheme);
 
     //================================
@@ -48,6 +61,7 @@ export default function({children, className="", serverTheme=""}){
     useEffect(()=>{
         applyTheme(theme);
     },[theme])
+
 
     return <body className={`${className} ${serverTheme}`}>
         <ThemeContext.Provider value={{theme, setTheme}}>

@@ -2,18 +2,18 @@ import settings from "./settings"
 
 // ==================================================
 // Here we will use the last used theme 
-export default function(cookies){
-    const lastTheme = cookies.get(settings.lastThemeCookie);
-    const theme = cookies.get(settings.themeCookie);
+export default function(headers){
+    const lastTheme = headers.get(settings.lastThemeHeader);
+    const theme = headers.get(settings.themeHeader)
 
     // ================================================
     // If the theme is not system, there is no need
     // to check the last theme.
     // ================================================
-    if (theme.value != "system"){
+    if (theme != "system"){
         return {
-            render: theme.value,
-            use: theme.value
+            render: theme,
+            use: theme
         }
     }
 
@@ -22,18 +22,18 @@ export default function(cookies){
     // So it won't flash when the user refreshes
     // with the same system interface.
     // ================================================
-    if (!lastTheme.value || !settings.allowedStyles.includes(lastTheme.value)){
+    if (!lastTheme || !settings.allowedStyles.includes(lastTheme)){
         // Use default theme
         // No history found
         return {
-            render: theme.value,
-            use: theme.value
+            render: theme,
+            use: theme
         }
     }
     else {
         return {
-            render: lastTheme.value,
-            use: theme.value
+            render: lastTheme,
+            use: theme
         }
     }
 }

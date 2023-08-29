@@ -6,8 +6,11 @@ import settings from "@/themes/settings"
 const allowedThemes = settings.allowed;
 const defaultTheme = settings.default;
 
-export const ThemeContext = createContext();
 
+// ================================
+// Theme Context
+// ================================
+export const ThemeContext = createContext();
 
 
 function check(theme){
@@ -52,7 +55,7 @@ function applyTheme(theme){
 }
 
 
-export default function({children, className="", handlerData={}}){  
+export default function({children, className="", handlerData}){  
     const [theme, setTheme] = useState(handlerData.use);
 
     //================================

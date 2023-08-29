@@ -8,10 +8,11 @@ const defaultTheme = settings.default;
 
 export const ThemeContext = createContext();
 
+
+
 function check(theme){
     if (allowedThemes.includes(theme)){
         if (theme === "system"){
-            //check system theme
             const system_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
             if (system_theme === "dark"){
                 return {
@@ -42,7 +43,6 @@ function check(theme){
 function applyTheme(theme){
     const body = document.querySelector("body");
     const parsedTheme = check(theme);
-    console.log("🚀 ~ file: ClientProvider.jsx:45 ~ applyTheme ~ parsedTheme:", parsedTheme)
 
     body.classList.remove("dark", "light");
     body.classList.add(parsedTheme.apply);
@@ -52,7 +52,6 @@ function applyTheme(theme){
 
 
 export default function({children, className="", serverTheme=""}){
-    console.log("🚀 ~ file: ClientProvider.jsx:55 ~ function ~ serverTheme:", serverTheme)
     const [theme, setTheme] = useState(serverTheme);
 
     //================================

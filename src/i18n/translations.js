@@ -6,6 +6,6 @@ export default {
         
     },
     "de": {
-        
+
     }
 }

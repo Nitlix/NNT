@@ -1,10 +1,10 @@
-import settings from "./settings"
+import settings from "@/themes/settings"
 
 // ==================================================
 // Here we will use the last used theme 
 export default function(headers){
     const lastTheme = headers.get(settings.lastThemeHeader);
-    const theme = headers.get(settings.themeHeader)
+    const theme = headers.get(settings.themeHeader);
 
     // ================================================
     // If the theme is not system, there is no need

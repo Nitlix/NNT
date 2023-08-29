@@ -11,6 +11,7 @@ const defaultTheme = settings.default;
 // Theme Context
 // ================================
 export const ThemeContext = createContext();
+export const LanguageContext = createContext();
 
 
 function check(theme){
@@ -55,7 +56,7 @@ function applyTheme(theme){
 }
 
 
-export default function({children, className="", handlerData}){  
+export default function({children, className="", handlerData, language}){  
     const [theme, setTheme] = useState(handlerData.use);
 
     //================================
@@ -68,9 +69,11 @@ export default function({children, className="", handlerData}){
     
     return <body className={`${className} ${handlerData.render}`}>
         <ThemeContext.Provider value={{theme, setTheme}}>
-            <main className={MAIN}>
-                {children}
-            </main>
+            <LanguageContext.Provider value={language}>
+                <main className={MAIN}>
+                    {children}
+                </main>
+            </LanguageContext.Provider>
         </ThemeContext.Provider>
     </body>
 }

@@ -3,9 +3,9 @@
 // ====================================
 export default {
     "en": {
-        
+        "welcome": "Welcome."
     },
     "de": {
-
+        "welcome": "Willkommen."
     }
 }

@@ -42,12 +42,14 @@ export default function middleware(request) {
         const { country } = geolocation(request);
         if (routes[country]) {
             lang = routes[country];
-        } else {
+        } 
+        else {
             lang = routes.default;
         }
-
-        request.cookies.set('lang', lang);
     }
+    
+    console.log('lang', lang)
+    request.cookies.set('lang', lang);
     request.headers.set('x-lang', lang);
 
 

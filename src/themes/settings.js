@@ -1,4 +1,7 @@
 export default {
     allowed: ["dark", "light", "system"],
-    default: "dark"
+    allowedStyles: ["dark", "light"],
+    default: "dark",
+    themeCookie: "theme",
+    lastThemeCookie: "lastTheme",
 }

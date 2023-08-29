@@ -47,12 +47,13 @@ function applyTheme(theme){
     body.classList.remove("dark", "light");
     body.classList.add(parsedTheme.apply);
 
-    document.cookie = `theme=${parsedTheme.store};path=/;max-age=31536000`;
+    document.cookie = `${settings.themeCookie}=${parsedTheme.store};path=/;max-age=31536000`;
+    document.cookie = `${settings.lastThemeCookie}=${parsedTheme.apply};path=/;max-age=31536000`
 }
 
 
-export default function({children, className="", serverTheme=""}){
-    const [theme, setTheme] = useState(serverTheme);
+export default function({children, className="", handlerData={}}){  
+    const [theme, setTheme] = useState(handlerData.use);
 
     //================================
     // Client Side Theme Check
@@ -61,8 +62,8 @@ export default function({children, className="", serverTheme=""}){
         applyTheme(theme);
     },[theme])
 
-
-    return <body className={`${className} ${serverTheme}`}>
+    
+    return <body className={`${className} ${handlerData.render}`}>
         <ThemeContext.Provider value={{theme, setTheme}}>
             <main className={MAIN}>
                 {children}

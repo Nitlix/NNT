@@ -19,7 +19,8 @@ const inter = Inter({ subsets: ['latin'] })
 // Next Imports
 // =====================
 import { cookies } from 'next/headers'
-import ClientProvider from "@/components/Provider/ClientProvider"
+import Provider from "@/themes/Provider"
+import firstHandler from "@/themes/firstHandler"
 
 // =====================
 // Metadata Export
@@ -29,16 +30,18 @@ export const metadata = metaGen();
 
 // =====================
 // Layout Export
-// =====================
+// =====================H
 export default function RootLayout({ children }) {
+    const themeHandlerData = firstHandler(cookies());
+    console.log("🚀 ~ file: layout.jsx:36 ~ RootLayout ~ themeHandlerData:", themeHandlerData)
     return (
         <html lang="en">
             <head>
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
-            <ClientProvider className={inter.className} serverTheme={cookies().get("theme").value}>
+            <Provider className={inter.className} handlerData={themeHandlerData}>
                 {children}
-            </ClientProvider>
+            </Provider>
         </html>
     )
 }

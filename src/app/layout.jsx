@@ -3,7 +3,11 @@
 // =====================
 import './globals.scss'
 import './flame.scss'
-import './themes.scss'
+
+// =====================
+// Theme CSS Imports
+// =====================
+import '@/themes/themes.scss'
 
 // =====================
 // Google Font (Inter)

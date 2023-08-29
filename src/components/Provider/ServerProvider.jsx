@@ -1,8 +1,12 @@
 import { cookies } from "next/headers";
 import ClientProvider from "./ClientProvider";
 
-const allowed_themes = ["dark", "light", "system"]
-const default_theme = "dark";
+import settings from "@/themes/settings";
+const allowed_themes = settings.allowed;
+const default_theme = settings.default;
+
+
+
 function checkCookiesTheme(){
     const theme = cookies().get("theme");
     if (allowed_themes.includes(theme)){
@@ -19,7 +23,7 @@ function checkCookiesTheme(){
 }
 
 export default function({children, className=""}){
-    return <ClientProvider className={`${checkCookiesTheme()} ${className}`}>
+    return <ClientProvider className={`${className}`} serverTheme={checkCookiesTheme()}>
         {children}
     </ClientProvider>
 }

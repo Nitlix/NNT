@@ -1,12 +1,15 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState, createContext } from "react";
 import MAIN from "@/var/main"
+import settings from "@/themes/settings"
 
-const allowed_themes = ["dark", "light", "system"]
-const default_theme = "dark";
-function check(){
-    const theme = localStorage.getItem("theme");
-    if (allowed_themes.includes(theme)){
+const allowedThemes = settings.allowed;
+const defaultTheme = settings.default;
+
+export const ThemeContext = createContext();
+
+function check(theme){
+    if (allowedThemes.includes(theme)){
         if (theme === "system"){
             //check system theme
             const system_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -19,33 +22,38 @@ function check(){
         return theme;
     }
     else {
-        localStorage.setItem("theme", default_theme);
-        return default_theme;
+        return defaultTheme;
     }
 }
 
 
-function applyTheme(){
+function applyTheme(theme){
     const body = document.querySelector("body");
+    const parsedTheme = check(theme);
 
-    const theme = check();
     body.classList.remove("dark", "light");
-    body.classList.add(theme);
-    localStorage.setItem("theme", theme);
-    //add it to cookies so the server can read it too
-    document.cookie = `theme=${theme};path=/;max-age=31536000`;
+    body.classList.add(parsedTheme);
+
+    localStorage.setItem("theme", parsedTheme);
+    document.cookie = `theme=${parsedTheme};path=/;max-age=31536000`;
 }
 
 
-export default function({children, className=""}){
-    //inject theme based on localhost parameter
-    useEffect(()=>{
-        applyTheme();
-    },[])
+export default function({children, className="", serverTheme=""}){
+    const [theme, setTheme] = useState(serverTheme);
 
-    return <body className={`${className}`}>
-        <main className={MAIN}>
-            {children}
-        </main>
+    //================================
+    // Client Side Theme Check
+    //================================
+    useEffect(()=>{
+        applyTheme(theme);
+    },[theme])
+
+    return <body className={`${className} ${serverTheme}`}>
+        <ThemeContext.Provider value={{theme, setTheme}}>
+            <main className={MAIN}>
+                {children}
+            </main>
+        </ThemeContext.Provider>
     </body>
 }

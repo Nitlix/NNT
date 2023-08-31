@@ -53,4 +53,4 @@ export default function middleware(request) {
 export const config = {
     // matcher solution for public, api, assets and _next exclusion
     matcher: "/((?!api|static|.*\\..*|_next).*)",
-  };
+};

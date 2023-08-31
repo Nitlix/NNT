@@ -58,7 +58,6 @@ export default function({children, className="", themeRetriever={}}){
         lastThemeCookie = 'last-theme',
     } = themeRetriever.config;
 
-    console.log(themeRetriever)
 
     const [theme, setTheme] = useState(themeRetriever.theme);
 

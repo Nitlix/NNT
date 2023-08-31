@@ -1,11 +1,11 @@
 This is a [Next.js](https://nextjs.org/) template created for super-powering Nitlix Apps quickly. It includes:
 * Inter - A google font.
-* Client theme provider, first rendered by the server.
-* MetaGen() - A function that generates meta tags for the page.
+* Client theme provider, first rendered by the server (nitlix-themes)
+* metaGen() - A function that generates meta tags for the page. (nitlix-metagen)
 * FlameCSS, for quick flexboxes as well as a few other things.
 * Quickstart global.scss
 * SASS already installed.
-* Prebuilt I18N support (With @vercel/edge, via headers and context)
+* Prebuilt I18N support (With @vercel/edge, via headers and context (nitlix-i18n))
 
 
 

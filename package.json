@@ -1,7 +1,6 @@
 {
   "name": "new-nitlix-app",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +10,10 @@
   "dependencies": {
     "@vercel/edge": "^1.0.1",
     "next": "13.4.19",
-    "nitlix": "^1.0.0",
+    "nitlix": "^1.0.1",
+    "nitlix-i18n": "^1.0.4",
+    "nitlix-metagen": "^1.0.1",
+    "nitlix-themes": "^1.1.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.66.1"

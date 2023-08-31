@@ -1,14 +1,13 @@
 export default {
-    allowed: ["dark", "light", "system"],
-    allowedStyles: ["dark", "light"],
+    allowedThemes: ['light', 'dark', 'system'],
+    defaultTheme: 'system',
+
+    allowedStyles: ['light', 'dark'],
+    defaultStyle: 'dark',
+
+    themeCookie: 'theme',
+    lastThemeCookie: 'last-theme',
     
-    default: "dark",
-    defaultRender: "dark",
-
-
-    themeCookie: "theme",
-    themeHeader: "x-theme",
-
-    lastThemeCookie: "lastTheme",
-    lastThemeHeader: "x-last-theme"
+    lastThemeHeaderSignal: 'x-last-theme',
+    themeHeaderSignal: 'x-theme-signal',
 }

@@ -16,35 +16,31 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 // =====================
-// Next Imports
-// =====================
-import { headers } from 'next/headers';
-import Provider from "@/modules/Provider"
-import languageSettings from "@/i18n/settings"
-
-// =====================
 // Metadata Export
 // =====================
-import metaGen from '@/modules/metaGen'
-import firstThemeHandler from '@/modules/firstThemeHandler'
-import getLoader from '@/auth/getLoader'
-export const metadata = metaGen();
+import { metaGen } from 'nitlix-metagen'
+export const metadata = metaGen()
+
+// =====================
+// Theme Provider
+// =====================
+import { themeRetriever } from 'nitlix-themes'
+import BodyThemeProvider from '@/themes/BodyThemeProvider'
+import themeSettings from "@/themes/settings"
+
 
 // =====================
 // Layout Export
 // =====================
 export default function RootLayout({ children }) {
-    const handlerData = firstThemeHandler(headers())
-    const language = headers().get(languageSettings.langHeader);
-
     return (
         <html lang="en">
             <head>
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
-            <Provider className={inter.className} handlerData={handlerData} language={language} authData={getLoader()}>
+            <BodyThemeProvider className={inter.className} themeRetriever={themeRetriever(themeSettings)}>
                 {children}
-            </Provider>
+            </BodyThemeProvider>
         </html>
     )
 }

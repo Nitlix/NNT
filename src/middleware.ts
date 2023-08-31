@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 import { i18nInjector } from 'nitlix-i18n';
 import { themeInjector } from 'nitlix-themes';
 import themeSettings from "@/themes/settings"
 
 
-export default function middleware(request) {
+export default function middleware(request: NextRequest) {
     // =================================
     // Create a response object
     // =================================
@@ -13,15 +13,13 @@ export default function middleware(request) {
         request: {
             // Apply old headers
             headers: request.headers,
-            // Apply old cookies
-            cookies: request.cookies
         }
     })
 
     // =================================
     // Define interaction functions
     // =================================
-    function setHeader(name, value){
+    function setHeader(name: string, value: string){
         response.headers.set(name, value);
         request.headers.set(name, value);
     }

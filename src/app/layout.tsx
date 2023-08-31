@@ -32,7 +32,11 @@ import themeSettings from "@/themes/settings"
 // =====================
 // Layout Export
 // =====================
-export default function RootLayout({ children }) {
+type LayoutType = {
+    children: React.ReactNode
+}
+
+export default function RootLayout({ children }: LayoutType) {
     return (
         <html lang="en">
             <head>

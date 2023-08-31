@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext } from "react";
 
 // ================================
 // Theme Context
 // ================================
-export const ThemeContext = createContext();
+type ThemeContextType = {
+    theme: string,
+    setTheme: React.Dispatch<React.SetStateAction<string>>
+}
+export const ThemeContext = createContext<ThemeContextType>(null as any);
 
-function check(theme, allowedThemes, defaultTheme){
+function check(theme: string, allowedThemes: string[], defaultTheme: string){
     if (allowedThemes.includes(theme)){
         if (theme === "system"){
             const system_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -37,8 +41,8 @@ function check(theme, allowedThemes, defaultTheme){
 }
 
 
-function applyTheme(theme, allowedThemes, defaultTheme, themeCookie, lastThemeCookie){
-    const body = document.querySelector("body");
+function applyTheme(theme: string, allowedThemes: string[], defaultTheme: string, themeCookie: string, lastThemeCookie: string){
+    const body = document.querySelector("body") as HTMLBodyElement;
     const parsedTheme = check(theme, allowedThemes, defaultTheme);
 
     body.classList.remove("dark", "light");
@@ -49,7 +53,28 @@ function applyTheme(theme, allowedThemes, defaultTheme, themeCookie, lastThemeCo
 }
 
 
-export default function({children, className="", themeRetriever={}}){  
+
+type BodyThemeProviderProps = {
+    children: React.ReactNode,
+    className?: string,
+    themeRetriever: {
+        theme: string,
+        lastTheme: string,
+        config: {
+            allowedThemes?: string[],
+            defaultTheme?: string,
+
+            themeCookie?: string,
+            lastThemeCookie?: string,
+        }
+    }
+}
+
+export default function({children, className="", themeRetriever}: BodyThemeProviderProps){ 
+    if (!themeRetriever){
+        console.error("A themeRetriever object is required.");
+    }
+    
     const {
         allowedThemes = ['light', 'dark', 'system'],
         defaultTheme = 'system',

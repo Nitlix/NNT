@@ -13,7 +13,7 @@
     "nitlix": "^1.0.1",
     "nitlix-i18n": "^1.0.6",
     "nitlix-metagen": "^1.0.1",
-    "nitlix-themes": "^1.1.5",
+    "nitlix-themes": "^1.1.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.66.1"

@@ -27,39 +27,38 @@ body {
 
 h1, h2, h3, h4, h5, p, span, a {
     --line-height: 1.1;
-    --font-weight: 500;
     letter-spacing: calc(var(--font-size) * var(--letter-spacing-multiplier));
     font-size: var(--font-size);
     line-height: var(--line-height);
 }
 
 h1 {
-    --font-weight: 800;
+    font-weight: 800;
     --font-size: 4rem;
 }
 
 h2 {
-    --font-weight: 700;
+    font-weight: 700;
     --font-size: 3rem;
 }
 
 h3 {
-    --font-weight: 700;
+    font-weight: 700;
     --font-size: 2rem;
 }
 
 h4 {
-    --font-weight: 700;
+    font-weight: 700;
     --font-size: 1.5rem;
 }
 
 h5 {
-    --font-weight: 700;
+    font-weight: 700;
     --font-size: 1.25rem;
 }
 
 p {
-    --font-weight: 500;
+    font-weight: 500;
     --font-size: 1rem;
     color: var(--secondary);
 }

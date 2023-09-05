@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org/) template created for super-powering Nit
 * FlameCSS, for quick flexboxes as well as a few other things.
 * Quickstart global.scss
 * SASS already installed.
+* Tailwind ready to fly.
 * Prebuilt I18N support (With @vercel/edge, via headers and context (nitlix-i18n))
 
 

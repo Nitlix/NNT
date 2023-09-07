@@ -14,7 +14,7 @@ This is a [Next.js](https://nextjs.org/) template created for super-powering Nit
 
 ```bash
 # First install the create-napp package globally
-npm i create-napp -g
+npm i create-napp@latest -g
 ```
 
 then run the create-napp command to initialise this template. Use "." or "./" for a local folder.

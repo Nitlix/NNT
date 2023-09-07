@@ -10,6 +10,22 @@ This is a [Next.js](https://nextjs.org/) template created for super-powering Nit
 
 
 
+## Quickstarting using create-napp
+
+```bash
+# First install the create-napp package globally
+npm i create-napp -g
+```
+
+then run the create-napp command to initialise this template. Use "." or "./" for a local folder.
+
+```bash
+create-napp
+```
+
+
+
+
 ## Cloning
 
 To initialise this template, choose one of the following options:
@@ -62,4 +78,4 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.jsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

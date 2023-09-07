@@ -1,16 +1,12 @@
+import { Translations } from "@/i18n/translations";
 import { getLocale } from "nitlix-i18n"
 
-type translations = {
-    [key: string]: {
-        [key: string]: string | number | boolean
-    }
-}
-
-const pageTranslations: translations = {
+const pageTranslations: Translations = {
     en: {
         welcome: "Welcome!"
     }
 }
+
 export default function(){
     const lang: any = getLocale();
 

@@ -43,7 +43,11 @@ export default function RootLayout({ children }: LayoutType) {
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
             <BodyThemeProvider className={inter.className} themeRetriever={themeRetriever(themeSettings)}>
-                {children}
+                <main className='_nitlix'>
+
+                    {children}
+                    
+                </main>
             </BodyThemeProvider>
         </html>
     )

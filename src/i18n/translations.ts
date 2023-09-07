@@ -3,18 +3,9 @@
 // ====================================
 
 export type Translation = {
-    [key: string]: string | Translation
+    [key: string]: string
 }
 
 export type Translations = {
     [key: string]: Translation
-}
-
-export default {
-    "en": {
-        "welcome": "Welcome."
-    },
-    "de": {
-        "welcome": "Willkommen."
-    }
 }

@@ -1,8 +1,8 @@
 :root {
     --spacing: 5rem;
-    --letter-spacing-multiplier: -0.05;
+    --letter-spacing-multiplier: -0.045;
 
-    --transition: .5s ease;
+    --transition: .5s cubic-bezier(0.175,0.885,0.32,1.275);
 }
 
 * {
@@ -26,10 +26,12 @@ body {
 }
 
 h1, h2, h3, h4, h5, p, span, a {
-    --line-height: 1.1;
     letter-spacing: calc(var(--font-size) * var(--letter-spacing-multiplier));
     font-size: var(--font-size);
-    line-height: var(--line-height);
+}
+
+h1,h2,h3,h4,h5 {
+    line-height: 1.1;
 }
 
 h1 {
@@ -58,13 +60,20 @@ h5 {
 }
 
 p {
+    line-height: 1.3;
     font-weight: 500;
     --font-size: 1rem;
     color: var(--secondary);
+
+    &.big {
+        font-weight: 600;
+        --font-size: 1.3rem;
+    }
 }
     
 a {
     text-decoration: none;
+    color: var(--primary);
 }
 
 button {

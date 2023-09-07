@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { i18nInjector } from 'nitlix-i18n';
 import { themeInjector } from 'nitlix-themes';
 import themeSettings from "@/themes/settings"
+import i18nSettings from "@/i18n/settings"
 
 
 export default function middleware(request: NextRequest) {
@@ -39,7 +40,7 @@ export default function middleware(request: NextRequest) {
     //====================
     // Language setting
     //====================
-    response = i18nInjector(request, {}, response).response;
+    response = i18nInjector(request, i18nSettings, response).response;
 
     //===================================
     // Return response to the renderer

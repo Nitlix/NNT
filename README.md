@@ -17,14 +17,18 @@ This is a [Next.js](https://nextjs.org/) template created for super-powering Nit
 npm i create-napp@latest -g
 ```
 
-then run the create-napp command to initialise this template. Use "." or "./" for a local folder.
+then run the create-napp command to initialise this template.
 
 ```bash
 create-napp
 ```
 
-
-
+You'll be promoted with this:
+```bash
+? Setup the project in...? »
+# Use "." or "./" for the local folder.
+# Use a foldername to setup the project in that folder. (It will be created if it doesn't exist
+```
 
 ## Cloning
 

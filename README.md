@@ -6,6 +6,7 @@ This is a [Next.js](https://nextjs.org/) template created for super-powering Nit
 * Quickstart global.scss
 * SASS already installed.
 * Tailwind ready to fly.
+* Prisma ready to launch! (Just create the .env vars)
 * Prebuilt I18N support (With @vercel/edge, via headers and context (nitlix-i18n))
 
 

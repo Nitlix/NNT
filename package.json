@@ -8,13 +8,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.3.1",
     "@vercel/edge": "latest",
-    "next": "latest",
+    "next": "^13.5.4",
     "nitlix": "latest",
     "nitlix-i18n": "latest",
     "nitlix-metagen": "latest",
     "nitlix-themes": "latest",
-    "react":  "latest",
+    "prisma": "^5.3.1",
+    "react": "latest",
     "react-dom": "latest",
     "sass": "latest"
   },

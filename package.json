@@ -7,6 +7,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma":{
+    "schema": "src/prisma/schema.prisma"
+  },
   "dependencies": {
     "@prisma/client": "^5.3.1",
     "@vercel/edge": "latest",

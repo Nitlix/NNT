@@ -2,10 +2,10 @@
 // Allowed languages and translations
 // ====================================
 
-export type Translation = {
+export interface Translation {
     [key: string]: string
 }
 
-export type Translations = {
+export interface Translations {
     [key: string]: Translation
 }

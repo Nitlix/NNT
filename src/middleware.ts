@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { i18nInjector } from 'nitlix-i18n';
 import { themeInjector } from 'nitlix-themes';
+import { signalsInjector } from 'nitlix-signals';
+
 import themeSettings from "@/themes/settings"
 import i18nSettings from "@/i18n/settings"
 
@@ -30,11 +32,19 @@ export default function middleware(request: NextRequest) {
     //==================================================
     setHeader("x-url", request.url);
 
+
+    //================================
+    // Inject signals
+    //================================
+    response = signalsInjector(request, response).response;
+
     
+
     //================================
     // Inject the theme cookies
     //================================
     response = themeInjector(request, themeSettings, response).response;
+
     
 
     //====================

@@ -98,7 +98,7 @@ export default function({children, className="", themeRetriever}: BodyThemeProvi
         applyTheme(theme, allowedThemes, defaultTheme, themeCookie, lastThemeCookie);
     },[theme]);
     
-    return <body className={`${className} ${renderTheme}`}>
+    return <body className={`${className}`} data-theme={renderTheme}>
         <ThemeContext.Provider value={{theme, setTheme}}>
             {children}
         </ThemeContext.Provider>

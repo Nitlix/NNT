@@ -14,24 +14,23 @@ export const ThemeContext = createContext<ThemeContextType>(null as any);
 function check(theme: string, allowedThemes: string[], defaultTheme: string){
     if (allowedThemes.includes(theme)){
         if (theme === "system"){
+            // Handle what happens when the theme is "system"
             const system_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-            if (system_theme === "dark"){
-                return {
-                    style: "dark",
-                    theme: "system"
-                }
-            }
             return {
-                style: "light",
+                style: system_theme,
                 theme: "system"
             }
         }
 
+        // Simply return the theme that's in use.
         return {
             style: theme,
             theme: theme
         }
     }
+
+    // Reset the theme to default
+    // if not allowed.
     else {
         return {
             style: defaultTheme,
@@ -39,7 +38,6 @@ function check(theme: string, allowedThemes: string[], defaultTheme: string){
         }
     }
 }
-
 
 function applyTheme(theme: string, allowedThemes: string[], defaultTheme: string, themeCookie: string, lastThemeCookie: string){
     const body = document.querySelector("body") as HTMLBodyElement;

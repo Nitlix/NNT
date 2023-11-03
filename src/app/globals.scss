@@ -14,19 +14,15 @@
 }
 
 ._nitlix {
-    position: relative;
-    overflow-x: hidden;
-    z-index: 0;
+    @apply relative overflow-hidden z-0;
 
     >* {
-        padding-left: var(--spacing);
-        padding-right: var(--spacing);
+        @apply px-[var(--spacing)];
     }
 }
 
 body {
-    color: var(--primary);
-    background: var(--back);
+    @apply text-[var(--primary)] bg-[var(--back)];
 }
 
 h1, h2, h3, h4, h5, p, span, a {
@@ -35,57 +31,52 @@ h1, h2, h3, h4, h5, p, span, a {
 }
 
 h1,h2,h3,h4,h5 {
-    line-height: 1.1;
+    @apply leading-[1.1];
 }
 
 h1 {
-    font-weight: 800;
+    @apply font-[800];
     --font-size: 4rem;
 }
 
 h2 {
-    font-weight: 700;
+    @apply font-bold;
     --font-size: 3rem;
 }
 
 h3 {
-    font-weight: 700;
+    @apply font-bold;
     --font-size: 2rem;
 }
 
 h4 {
-    font-weight: 700;
+    @apply font-bold;
     --font-size: 1.5rem;
 }
 
 h5 {
-    font-weight: 700;
+    @apply font-bold;
     --font-size: 1.25rem;
 }
 
 p {
-    line-height: 1.3;
-    font-weight: 500;
+    @apply leading-[1.3] font-medium text-[var(--secondary)];
     --font-size: 1rem;
-    color: var(--secondary);
 
     &.big {
-        font-weight: 600;
+        @apply font-semibold;
         --font-size: 1.3rem;
     }
 }
     
 a {
-    text-decoration: none;
-    color: var(--primary);
+    @apply no-underline text-[var(--primary)];
 }
 
 button {
-    outline: none;
-    border: none;
-    font-family: inherit;
+    @apply cursor-pointer outline-none border-none font-[inherit];
 }
 
 input {
-    font-family: inherit;
+    @apply outline-none font-[inherit];
 }

@@ -1,4 +1,4 @@
-body.dark {
+body[data-theme="dark"] {
     --primary: #FFF;
     --secondary: #ffffffb2;
 
@@ -13,7 +13,7 @@ body.dark {
     --shadow3: rgba(255, 255, 255, 0.247);
 }
 
-body.light {
+body[data-theme="light"] {
     --primary: #000;
     --secondary: #000000b2;
 

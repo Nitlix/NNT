@@ -45,8 +45,8 @@ function applyTheme(theme: string, allowedThemes: string[], defaultTheme: string
     const body = document.querySelector("body") as HTMLBodyElement;
     const parsedTheme = check(theme, allowedThemes, defaultTheme);
 
-    body.classList.remove("dark", "light");
-    body.classList.add(parsedTheme.style);
+    // Set the theme using the "data-theme" attribute.
+    body.setAttribute("data-theme", parsedTheme.style);
 
     document.cookie = `${themeCookie}=${parsedTheme.theme};path=/;max-age=31536000`;
     document.cookie = `${lastThemeCookie}=${parsedTheme.style};path=/;max-age=31536000`

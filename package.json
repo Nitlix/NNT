@@ -11,18 +11,19 @@
         "schema": "src/prisma/schema.prisma"
     },
     "dependencies": {
-        "@prisma/client": "^5.3.1",
+        "@prisma/client": "latesr",
         "@vercel/edge": "latest",
-        "next": "^14.0.1",
+        "next": "latest",
         "nitlix": "latest",
         "nitlix-i18n": "latest",
         "nitlix-metagen": "latest",
         "nitlix-signals": "latest",
         "nitlix-themes": "latest",
-        "prisma": "^5.3.1",
+        "prisma": "latest",
         "react": "latest",
         "react-dom": "latest",
-        "sass": "latest"
+        "sass": "latest",
+        "tailwind-merge": "latest"
     },
     "devDependencies": {
         "@types/node": "latest",

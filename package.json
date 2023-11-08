@@ -11,7 +11,7 @@
         "schema": "src/prisma/schema.prisma"
     },
     "dependencies": {
-        "@prisma/client": "latesr",
+        "@prisma/client": "latest",
         "@vercel/edge": "latest",
         "next": "latest",
         "nitlix": "latest",

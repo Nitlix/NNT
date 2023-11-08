@@ -14,7 +14,9 @@
 }
 
 ._nitlix {
-    @apply relative overflow-hidden z-0;
+    @apply relative overflow-hidden z-0
+
+    w-full max-w-[80rem];
 
     >* {
         @apply px-[var(--spacing)];
@@ -22,7 +24,7 @@
 }
 
 body {
-    @apply text-[var(--primary)] bg-[var(--back)];
+    @apply text-[var(--primary)] bg-[var(--back)] grid place-items-center;
 }
 
 h1, h2, h3, h4, h5, p, span, a {

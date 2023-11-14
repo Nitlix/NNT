@@ -13,6 +13,7 @@
     "dependencies": {
         "@prisma/client": "latest",
         "@vercel/edge": "latest",
+        "gsap": "^3.12.2",
         "next": "latest",
         "nitlix": "latest",
         "nitlix-i18n": "latest",

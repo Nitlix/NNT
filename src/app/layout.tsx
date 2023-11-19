@@ -3,6 +3,7 @@
 // =====================
 import './globals.scss'
 import './flame.scss'
+import './locomotiveScroll.scss'
 
 // =====================
 // Theme CSS Imports
@@ -43,7 +44,7 @@ export default function RootLayout({ children }: LayoutType) {
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
             <BodyThemeProvider className={inter.className} themeRetriever={themeRetriever(themeSettings)}>
-                <main className='_nitlix'>
+                <main className='_nitlix' data-scroll-container>
 
                     {children}
                     

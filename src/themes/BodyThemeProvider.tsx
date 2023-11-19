@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext, useRef } from "react";
 
 // ================================
 // Theme Context
@@ -95,7 +95,34 @@ export default function({children, className="", themeRetriever}: BodyThemeProvi
     useEffect(()=>{
         applyTheme(theme, allowedThemes, defaultTheme, themeCookie, lastThemeCookie);
     },[theme]);
+
     
+    // ================================
+    // Also using Locomotive Scroll
+    // Feel free to remove this.
+    // ================================
+    function initLS(){
+        import("locomotive-scroll").then(locomotiveModule => {
+            const LocomotiveScroll = locomotiveModule.default
+            const scroll = new LocomotiveScroll({
+                el: document.querySelector("[data-scroll-container]") as HTMLElement,
+                smooth: true,
+            })
+
+            return () => { scroll.destroy() }
+        })
+    }
+    
+    useEffect(()=>{
+        const ua = navigator.userAgent;
+        const mobile = ua.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+        if (!mobile && window.innerWidth > 1024){
+            initLS();
+        }
+    }, [])
+
+
+
     return <body className={className} data-theme={renderTheme}>
         <ThemeContext.Provider value={{theme, setTheme}}>
             {children}

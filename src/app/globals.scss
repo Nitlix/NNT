@@ -24,7 +24,7 @@
 }
 
 body {
-    @apply text-[var(--primary)] bg-[var(--back)] grid place-items-center;
+    @apply text-[var(--primary)] bg-[var(--back)] grid place-items-center lg:overflow-hidden;
 }
 
 h1, h2, h3, h4, h5, p, span, a {

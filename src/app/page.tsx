@@ -4,7 +4,8 @@ import { getLocale } from "nitlix-i18n"
 
 const pageTranslations: Translations = {
     en: {
-        welcome: "WELCOME"
+        welcome: "WELCOME",
+        more: "MORE"
     }
 }
 
@@ -16,6 +17,11 @@ export default function(){
         <h3 className={`w-full h-[100vh] flex center ${strretchSans.className}`}>
             {
                 pageTranslations[lang].welcome
+            }
+        </h3>
+        <h3 className={`w-full h-[100vh] flex center ${strretchSans.className}`}>
+            {
+                pageTranslations[lang].more
             }
         </h3>
     </>

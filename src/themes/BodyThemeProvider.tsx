@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, createContext, useRef } from "react";
+import { useEffect, useState, createContext } from "react";
 
 // ================================
 // Theme Context

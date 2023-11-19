@@ -99,25 +99,58 @@ export default function({children, className="", themeRetriever}: BodyThemeProvi
     
     // ================================
     // Also using Locomotive Scroll
-    // Feel free to remove this.
+    // Feel free to edit/remove this.
     // ================================
-    function initLS(){
-        import("locomotive-scroll").then(locomotiveModule => {
-            const LocomotiveScroll = locomotiveModule.default
-            const scroll = new LocomotiveScroll({
-                el: document.querySelector("[data-scroll-container]") as HTMLElement,
-                smooth: true,
-            })
-
-            return () => { scroll.destroy() }
-        })
-    }
-    
     useEffect(()=>{
         const ua = navigator.userAgent;
-        const mobile = ua.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+        const mobile = ua.match(/(iPhone)|(iPod)|(android)|(webOS)/i);
+        let usingLS = false;
+        let LS: any = null;
+
+        // Initialiser
+        function initLS(){
+            import("locomotive-scroll").then(locomotiveModule => {
+                const LocomotiveScroll = locomotiveModule.default
+                LS = new LocomotiveScroll({
+                    el: document.querySelector("[data-scroll-container]") as HTMLElement,
+                    smooth: true,
+                })
+            })
+        }
+
+        // Resize Action
+        const resizeAction = ()=>{
+            if (window.innerWidth > 1024){
+                if (!mobile){
+                    if (!usingLS){
+                        usingLS = true;
+                        LS = initLS();
+                    }
+                }
+                
+            }
+            else {
+                if (usingLS){
+                    usingLS = false;
+                    LS.destroy();
+                }
+            }
+        }
+
+        // Bind to resize event
+        window.addEventListener("resize", resizeAction);
+
+        // This is run on initial load.
         if (!mobile && window.innerWidth > 1024){
             initLS();
+        }
+
+        // Cleanup
+        return ()=>{
+            document.removeEventListener("resize", resizeAction);
+            if (usingLS){
+                LS.destroy();
+            }
         }
     }, [])
 

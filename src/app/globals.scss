@@ -14,12 +14,10 @@
 }
 
 ._nitlix {
-    @apply relative overflow-hidden z-0
-
-    w-full max-w-[80rem];
+    @apply relative overflow-hidden z-0 w-full;
 
     >* {
-        @apply px-[var(--spacing)];
+        @apply px-[var(--spacing)] max-w-[80rem];
     }
 }
 

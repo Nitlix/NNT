@@ -122,10 +122,8 @@ export default function({children, className="", themeRetriever}: BodyThemeProvi
         const resizeAction = ()=>{
             if (window.innerWidth > 1024){
                 if (!mobile){
-                    if (!usingLS){
-                        usingLS = true;
-                        LS = initLS();
-                    }
+                    usingLS = true;
+                    LS = initLS();
                 }
                 
             }

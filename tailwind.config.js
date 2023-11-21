@@ -9,7 +9,20 @@ module.exports = {
         "./src/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: {
+                    DEFAULT: "#FFF",
+                    dark: "#FFF",
+                    light: "#000",
+                },
+                secondary: {
+                    DEFAULT: "FFFFFFb2",
+                    dark: "#FFFFFFb2",
+                    light: "#000000b2",
+                },
+            },
+        },
     },
     plugins: [],
     darkMode: ["class", "[data-theme='dark']"],

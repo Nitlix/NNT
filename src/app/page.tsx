@@ -14,12 +14,12 @@ export default function(){
     const lang: any = getLocale();
 
     return <>
-        <h3 className={`w-full h-[100vh] flex center ${strretchSans.className}`}>
+        <h3 className={`w-full !max-w-none h-[100vh] flex justify-center items-center ${strretchSans.className}`} data-scroll data-scroll-direction="horizontal" data-scroll-speed="10">
             {
                 pageTranslations[lang].welcome
             }
         </h3>
-        <h3 className={`w-full h-[100vh] flex center ${strretchSans.className}`}>
+        <h3 className={`w-full !max-w-none h-[100vh] flex justify-center items-center ${strretchSans.className}`}>
             {
                 pageTranslations[lang].more
             }

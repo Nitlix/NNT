@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, createContext } from "react";
+import "./locomotiveScroll.scss";
 
 // ================================
 // Theme Context

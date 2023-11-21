@@ -2,8 +2,6 @@
 // Global CSS Imports
 // =====================
 import './globals.scss'
-import './flame.scss'
-import './locomotiveScroll.scss'
 
 // =====================
 // Theme CSS Imports

@@ -15,7 +15,7 @@
 }
 
 ._nitlix {
-    @apply relative overflow-hidden z-0 w-full;
+    @apply relative overflow-hidden z-0 w-full flex flex-col justify-center items-center;
 
     >* {
         @apply px-[var(--spacing)] max-w-[80rem];

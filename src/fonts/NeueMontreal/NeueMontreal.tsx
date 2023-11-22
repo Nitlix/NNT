@@ -26,7 +26,6 @@ const font = localFont({
             weight: '700',
             style: 'italic',
         },
-        //medium
         {
             path: './NeueMontreal-Medium.woff2',
             weight: '500',

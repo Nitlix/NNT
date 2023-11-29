@@ -1,9 +1,9 @@
 export default {
-    allowedThemes: ['light', 'dark', 'system'],
-    defaultTheme: 'system',
+    allowedThemes: ['dark'], // Also 'system' and 'light' are allowed
+    defaultTheme: 'dark', // Same here
 
-    allowedStyles: ['light', 'dark'],
-    defaultStyle: 'dark',
+    allowedStyles: ['dark'], // Also 'light' is allowed (Used for last renders)
+    defaultStyle: 'dark', // Same here; this should be the same as the default theme
 
     themeCookie: 'theme',
     lastThemeCookie: 'last-theme',

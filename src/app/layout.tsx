@@ -15,6 +15,11 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 // =====================
+// Custom Font (Neue Montreal)
+// =====================
+import NeueMontreal from "@/fonts/NeueMontreal/NeueMontreal"
+
+// =====================
 // Metadata Export
 // =====================
 import { metaGen } from 'nitlix-metagen'
@@ -26,6 +31,7 @@ export const metadata = metaGen()
 import { themeRetriever } from 'nitlix-themes'
 import BodyThemeProvider from '@/themes/BodyThemeProvider'
 import themeSettings from "@/themes/settings"
+import Aos from '@/lib/Aos/Aos'
 
 
 // =====================
@@ -41,11 +47,10 @@ export default function RootLayout({ children }: LayoutType) {
             <head>
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
-            <BodyThemeProvider className={inter.className} themeRetriever={themeRetriever(themeSettings)}>
+            <BodyThemeProvider className={NeueMontreal.className} themeRetriever={themeRetriever(themeSettings)}>
+                <Aos />
                 <main className='_nitlix' data-scroll-container>
-
                     {children}
-                    
                 </main>
             </BodyThemeProvider>
         </html>

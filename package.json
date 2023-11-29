@@ -13,9 +13,10 @@
     "dependencies": {
         "@prisma/client": "latest",
         "@vercel/edge": "latest",
-        "gsap": "^3.12.2",
-        "locomotive-scroll": "^4.1.4",
-        "next": "^14.0.3",
+        "gsap": "latest",
+        "locomotive-aos": "latest",
+        "locomotive-scroll": "latest",
+        "next": "latest",
         "nitlix": "latest",
         "nitlix-i18n": "latest",
         "nitlix-metagen": "latest",
@@ -28,7 +29,7 @@
         "tailwind-merge": "latest"
     },
     "devDependencies": {
-        "@types/locomotive-scroll": "^4.1.3",
+        "@types/locomotive-scroll": "latest",
         "@types/node": "latest",
         "@types/react": "latest",
         "@types/react-dom": "latest",

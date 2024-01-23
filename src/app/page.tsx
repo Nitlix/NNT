@@ -8,7 +8,6 @@ const pageTranslations: Translations = {
     }
 }
 
-
 export default function(){
     const lang: any = getLocale();
 

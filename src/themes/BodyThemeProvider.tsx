@@ -2,6 +2,7 @@
 
 import { useEffect, useState, createContext } from "react";
 import "./locomotiveScroll.scss";
+import { setClientCookie } from "nitlix-client";
 
 // ================================
 // Theme Context
@@ -47,8 +48,8 @@ function applyTheme(theme: string, allowedThemes: string[], defaultTheme: string
     // Set the theme using the "data-theme" attribute.
     body.setAttribute("data-theme", parsedTheme.style);
 
-    document.cookie = `${themeCookie}=${parsedTheme.theme};path=/;max-age=31536000`;
-    document.cookie = `${lastThemeCookie}=${parsedTheme.style};path=/;max-age=31536000`
+    setClientCookie(themeCookie, parsedTheme.theme, 365);
+    setClientCookie(lastThemeCookie, parsedTheme.style, 365);
 }
 
 

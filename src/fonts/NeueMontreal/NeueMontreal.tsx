@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 // Neue Montreal
 // Font class Export.
 // =====================
-const font = localFont({
+const NeueMontreal = localFont({
     src: [
         {
             path: './NeueMontreal-Regular.woff2',
@@ -40,4 +40,4 @@ const font = localFont({
     display: 'swap',
 });
 
-export default font;
+export default NeueMontreal;

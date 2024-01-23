@@ -6,7 +6,7 @@ import localFont from 'next/font/local';
 // Neutral Grotesk
 // Font class Export.
 // =====================
-const font = localFont({
+const NeutralGrotesk = localFont({
     src: [
         {
             path: './NaturalGrotesk-Regular.woff2',
@@ -72,4 +72,4 @@ const font = localFont({
     display: 'swap',
 });
 
-export default font;
+export default NeutralGrotesk;

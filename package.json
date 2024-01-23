@@ -18,6 +18,7 @@
         "locomotive-scroll": "latest",
         "next": "latest",
         "nitlix": "latest",
+        "nitlix-client": "^1.0.1",
         "nitlix-i18n": "latest",
         "nitlix-metagen": "latest",
         "nitlix-signals": "latest",

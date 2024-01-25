@@ -67,6 +67,10 @@ html.has-scroll-dragging {
     @apply absolute top-0 right-0 bg-black dark:bg-white opacity-100 w-[7px] rounded-[10px] m-[2px] cursor-[webkit-grab] cursor-[grab];
 }
 
+.c-scrollbar_thumb, [data-scroll-container] {
+    transition: .5s cubic-bezier(0.175,0.885,0.32,1.275) !important;
+}
+
 .has-scroll-dragging .c-scrollbar_thumb {
     cursor: -webkit-grabbing;
     cursor: grabbing;

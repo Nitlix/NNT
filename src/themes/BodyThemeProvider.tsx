@@ -148,6 +148,10 @@ export default function({children, className="", themeRetriever}: BodyThemeProvi
         if (((window.innerWidth <= 1024) || mobile) && usingLS){
             setUsingLS(false);
         }
+
+        if (usingLS){
+            getLS()?.update();
+        }
     }
 
 

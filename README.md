@@ -1,15 +1,17 @@
+## Now stable! 💖
+
 This is a [Next.js](https://nextjs.org/) template created for super-powering Nitlix Apps quickly. It includes:
-* Inter - A google font.
-* Client theme provider, first rendered by the server (nitlix-themes)
-* metaGen() - A function that generates meta tags for the page. (nitlix-metagen)
-* FlameCSS, for quick flexboxes as well as a few other things.
-* Quickstart global.scss
-* SASS already installed.
-* Tailwind ready to fly.
-* Prisma ready to launch! (Just create the .env vars)
-* Prebuilt I18N support (With @vercel/edge, via headers and context (nitlix-i18n))
 
-
+-   Inter - A google font.
+-   Client theme provider, first rendered by the server (nitlix-themes)
+-   The theme provider includes Locomotive Scroll, AOS built specifically for Loco. (locomotive-aos)
+-   metaGen() - A function that generates meta tags for the page. (nitlix-metagen)
+-   Quickstart global.scss and animations.scss
+-   SASS already installed.
+-   Tailwind ready to fly.
+-   4 Fonts to start with: Neue Montreal, Neutral Grotesk, Inter and Strretch Sans.
+-   Prisma ready to launch! (Just create the .env vars)
+-   Prebuilt I18N support (With @vercel/edge, via headers and context (nitlix-i18n))
 
 ## Quickstarting using create-napp
 
@@ -25,6 +27,7 @@ create-napp
 ```
 
 You'll be promoted with this:
+
 ```bash
 ? Setup the project in...? »
 # Use "." or "./" for the local folder.
@@ -54,10 +57,6 @@ gh repo clone Nitlix/NitlixNextTemplate <folder-name>
 gh repo fork Nitlix/NitlixNextTemplate
 ```
 
-
-
-
-
 ## Getting Started
 
 Firstly install the dependencies:
@@ -69,7 +68,6 @@ yarn
 # or
 pnpm i
 ```
-
 
 Then, run the development server:
 

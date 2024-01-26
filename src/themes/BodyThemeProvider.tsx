@@ -3,6 +3,7 @@
 import { useEffect, useState, createContext } from "react";
 import "./locomotiveScroll.scss";
 import { setClientCookie } from "nitlix-client";
+import LocomotiveScroll from "locomotive-scroll";
 
 // ================================
 // Theme Context
@@ -12,6 +13,20 @@ type ThemeContextType = {
     setTheme: React.Dispatch<React.SetStateAction<string>>
 }
 export const ThemeContext = createContext<ThemeContextType>(null as any);
+
+
+// ================================
+// Locomotive Scroll Context
+// ================================
+type LocomotiveScrollContextType = {
+    getLS: ()=>LocomotiveScroll | null,
+    initLS: ()=>void,
+    usingLS: number | boolean,
+    setUsingLS: React.Dispatch<React.SetStateAction<number | boolean>>
+}
+export const LocomotiveScrollContext = createContext<LocomotiveScrollContextType>(null as any);
+
+
 
 function check(theme: string, allowedThemes: string[], defaultTheme: string){
     if (allowedThemes.includes(theme)){
@@ -70,6 +85,7 @@ type BodyThemeProviderProps = {
     }
 }
 
+
 export default function({children, className="", themeRetriever}: BodyThemeProviderProps){ 
     if (!themeRetriever){
         console.error("A themeRetriever object is required.");
@@ -103,62 +119,70 @@ export default function({children, className="", themeRetriever}: BodyThemeProvi
     // Also using Locomotive Scroll
     // Feel free to edit/remove this.
     // ================================
-    useEffect(()=>{
+    const [LS, setLS] = useState<LocomotiveScroll | null>(null);
+    const [usingLS, setUsingLS] = useState<number | boolean>(7);
+    function getLS(){
+        return LS;
+    }
+
+    function initLS(){
+        import("locomotive-scroll").then(locomotiveModule => {
+            const LocomotiveScroll = locomotiveModule.default
+            const ls = new LocomotiveScroll({
+                el: document.querySelector("[data-scroll-container]") as HTMLElement,
+                smooth: true,
+            })
+
+            setLS(ls);
+        })
+    }
+
+    function resizeAction(){
         const ua = navigator.userAgent;
         const mobile = ua.match(/(iPhone)|(iPod)|(android)|(webOS)/i);
-        let usingLS = false;
-        let LS: any = null;
+        
+        if ((window.innerWidth > 1024) && !mobile && !usingLS){
+            setUsingLS(true);
+        }
+        
+        if (((window.innerWidth <= 1024) || mobile) && usingLS){
+            setUsingLS(false);
+        }
+    }
 
-        // Initialiser
-        function initLS(){
-            import("locomotive-scroll").then(locomotiveModule => {
-                const LocomotiveScroll = locomotiveModule.default
-                LS = new LocomotiveScroll({
-                    el: document.querySelector("[data-scroll-container]") as HTMLElement,
-                    smooth: true,
-                })
-            })
+
+    useEffect(()=>{
+        if (usingLS == 7){
+            setUsingLS(true)
+            return;
         }
 
-        // Resize Action
-        const resizeAction = ()=>{
-            if (window.innerWidth > 1024){
-                if (!mobile){
-                    usingLS = true;
-                    LS = initLS();
-                }
-                
-            }
-            else {
-                if (usingLS){
-                    usingLS = false;
-                    LS.destroy();
-                }
-            }
+        if (usingLS){
+            initLS();
+        }
+        else {
+            const ls = getLS() as LocomotiveScroll;
+            ls.destroy()
         }
 
         // Bind to resize event
         window.addEventListener("resize", resizeAction);
 
-        // This is run on initial load.
-        if (!mobile && window.innerWidth > 1024){
-            initLS();
-        }
-
         // Cleanup
         return ()=>{
             document.removeEventListener("resize", resizeAction);
-            if (usingLS){
-                LS.destroy();
-            }
+            if (usingLS) getLS()?.destroy();
         }
-    }, [])
+    }, [usingLS]);
+    // End of Locomotive Scroll
 
 
 
     return <body className={className} data-theme={renderTheme}>
         <ThemeContext.Provider value={{theme, setTheme}}>
-            {children}
+            <LocomotiveScrollContext.Provider value={{getLS, initLS, usingLS, setUsingLS}}>
+                {children}
+            </LocomotiveScrollContext.Provider>
         </ThemeContext.Provider>
     </body>
 }

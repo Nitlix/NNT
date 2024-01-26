@@ -5,6 +5,10 @@ const pageTranslations: Translations = {
     en: {
         welcome: "Welcome to NNT 🚀",
         more: "More"
+    },
+    de: {
+        welcome: "Willkommen bei NNT 🚀",
+        more: "Mehr"
     }
 }
 

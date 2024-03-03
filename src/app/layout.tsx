@@ -22,7 +22,10 @@ import NeueMontreal from "@/fonts/NeueMontreal/NeueMontreal"
 // =====================
 // Metadata Export
 // =====================
-import { metaGen } from 'nitlix-metagen'
+import { metaGen, setDefaults } from 'nitlix-metagen'
+setDefaults({
+    title: "NNT App"
+})
 export const metadata = metaGen()
 
 // =====================

@@ -24,7 +24,7 @@
         "nitlix-metagen": "latest",
         "nitlix-signals": "latest",
         "nitlix-themes": "^1.1.9",
-        "nparallax": "^1.0.1",
+        "nparallax": "^1.0.2",
         "prisma": "latest",
         "react": "latest",
         "react-dom": "latest",

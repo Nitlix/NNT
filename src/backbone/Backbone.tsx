@@ -37,9 +37,9 @@ export const ThemeContext = createContext<ThemeContextType>(null as any);
 type Scroll = Lenis;
 
 type SPContextType = {
-    lenis: Scroll | null
-    controller: SPController
-    setController: React.Dispatch<React.SetStateAction<SPController>>
+    scroll: Scroll | null
+    SPController: SPController
+    setSPController: React.Dispatch<React.SetStateAction<SPController>>
     parallax: NParallax | null
 }
 
@@ -128,22 +128,24 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
     }, [theme]);
 
 
-    // ================================
-    // Lenis Scroll init Section
+
+
+
+    //================================
+    // SP Section
     // Feel free to edit/remove this.
-    // ================================
+    //================================
     const [scroll, setScroll] = useState<Lenis | null>(null);
     const [parallax, setParallax] = useState<NParallax | null>(null);
-    const [scrollController, setScrollController] = useState<SPController>("ALLOWINIT");
+    const [SPController, setSPController] = useState<SPController>("ALLOWINIT");
+
 
     function onResize() {
         if ((window.innerWidth < 1024)) {
-            setScrollController("DISABLE");
-            console.log("Disabled")
+            setSPController("DISABLE");
         }
         else {
-            setScrollController("ENABLE");
-            console.log("Enabled")
+            setSPController("ENABLE");
         }
     }
 
@@ -155,57 +157,71 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
         return parallax;
     }
 
-    function initSP() {
-        const ls = new Lenis({
-            easing: (x) => {
-                return x === 0
-                    ? 0
-                    : x === 1
-                        ? 1
-                        : x < 0.5 ? Math.pow(2, 20 * x - 10) / 2
-                            : (2 - Math.pow(2, -20 * x + 10)) / 2;
-            },
-            lerp: 0.15
-        })
-
-        const np = new NParallax();
-
-        function raf(time: number) {
-            ls.raf(time)
-            requestAnimationFrame(raf)
-        }
-        requestAnimationFrame(raf)
-        setScroll(ls)
-        setParallax(np)
-    }
 
 
-    // Scroll Controller
+
+    // SP Main Controller
     useEffect(() => {
-        if ((scrollController == "ALLOWINIT") && (window.innerWidth > 1024)) {
-            getScroll()?.destroy();
-            getParallax()?.destroy();
-            initSP();
+        function initSP() {
+            const ls = new Lenis({
+                easing: (x) => {
+                    return x === 0
+                        ? 0
+                        : x === 1
+                            ? 1
+                            : x < 0.5 ? Math.pow(2, 20 * x - 10) / 2
+                                : (2 - Math.pow(2, -20 * x + 10)) / 2;
+                },
+                lerp: 0.15
+            })
+
+            const np = new NParallax();
+
+            function raf(time: number) {
+                ls.raf(time)
+                requestAnimationFrame(raf)
+            }
+            requestAnimationFrame(raf)
+            setScroll(ls)
+            setParallax(np)
         }
 
-        if (scrollController == "DISABLE") {
+        function destroySP() {
             getScroll()?.destroy();
             getParallax()?.destroy();
         }
 
-        window.addEventListener("resize", onResize);
+        switch (SPController) {
+            case "ALLOWINIT":
+                if (window.innerWidth > 1024) {
+                    initSP();
+                }
+                break;
+            case "DISABLE":
+                destroySP();
+                break;
+            case "ENABLE":
+                initSP();
+                break;
+        }
 
         return () => {
-            getScroll()?.destroy();
-            getParallax()?.destroy();
+            destroySP();
         }
-    }, [scrollController])
+    }, [SPController])
+
+    useEffect(() => {
+        window.addEventListener("resize", onResize);
+    }, []);
+    //==============
+    // End of SP
+    //==============
 
 
 
     return <body className={className} data-theme={renderTheme}>
         <ThemeContext.Provider value={{ theme, setTheme }}>
-            <SPContext.Provider value={{ lenis: scroll, controller: scrollController, setController: setScrollController, parallax: parallax }}>
+            <SPContext.Provider value={{ scroll, SPController, setSPController, parallax }}>
                 {children}
             </SPContext.Provider>
         </ThemeContext.Provider>

@@ -194,7 +194,7 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
         switch (SPController) {
             case "ALLOWINIT":
                 if (window.innerWidth > 1024) {
-                    initSP();
+                    setSPController("ENABLE");
                 }
                 break;
             case "DISABLE":

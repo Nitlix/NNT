@@ -6,7 +6,7 @@ import './globals.scss'
 // =====================
 // Theme CSS Imports
 // =====================
-import '@/themes/themes.scss'
+import '@/backbone/themes.scss'
 
 // =====================
 // Google Font (Inter)
@@ -29,30 +29,28 @@ export const metadata = metaGen()
 // Theme Provider
 // =====================
 import { themeRetriever } from 'nitlix-themes'
-import BodyThemeProvider from '@/themes/BodyThemeProvider'
-import themeSettings from "@/themes/settings"
+import Backbone from '@/backbone/Backbone'
+import themeSettings from "@/backbone/settings"
 import Aos from '@/lib/Aos/Aos'
 
 
 // =====================
 // Layout Export
 // =====================
-type LayoutType = {
-    children: React.ReactNode
-}
-
-export default function RootLayout({ children }: LayoutType) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <head>
                 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
             </head>
-            <BodyThemeProvider className={NeueMontreal.className} themeRetriever={themeRetriever(themeSettings)}>
+            <Backbone className={NeueMontreal.className} themeRetriever={themeRetriever(themeSettings)}>
+                {/* Feel free to remove the below if you don't with to use AOS */}
                 <Aos />
+
                 <main className='_nitlix' data-scroll-container>
                     {children}
                 </main>
-            </BodyThemeProvider>
+            </Backbone>
         </html>
     )
 }

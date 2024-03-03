@@ -28,9 +28,6 @@
 
 body {
     @apply text-black bg-white grid place-items-center;
-
-    //If you're not using Locomotive Scroll, remove the line below.
-    @apply lg:overflow-hidden;
 }
 
 body[data-theme="dark"] {

@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@prisma/client": "latest",
+        "@studio-freight/lenis": "^1.0.39",
         "@vercel/edge": "latest",
         "gsap": "latest",
         "locomotive-aos": "latest",
@@ -22,7 +23,8 @@
         "nitlix-i18n": "latest",
         "nitlix-metagen": "latest",
         "nitlix-signals": "latest",
-        "nitlix-themes": "latest",
+        "nitlix-themes": "^1.1.9",
+        "nparallax": "^1.0.1",
         "prisma": "latest",
         "react": "latest",
         "react-dom": "latest",

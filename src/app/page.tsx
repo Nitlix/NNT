@@ -12,11 +12,13 @@ const pageTranslations: Translations = {
     }
 }
 
-export default function(){
+export default function () {
     const lang: any = getLocale();
 
-    return <> 
-        <h3 className="text-[3rem] w-full !max-w-none h-[100vh] flex justify-center items-center" data-scroll data-scroll-direction="horizontal" data-scroll-speed="10">
+    return <>
+        <h3
+            className="text-[3rem] w-full !max-w-none h-[100vh] flex justify-center items-center"
+            data-np-action="horizontal" data-np-speed="-1">
             {
                 pageTranslations[lang].welcome
             }

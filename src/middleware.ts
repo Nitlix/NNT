@@ -4,7 +4,7 @@ import { i18nInjector } from 'nitlix-i18n';
 import { themeInjector } from 'nitlix-themes';
 import { signalsInjector } from 'nitlix-signals';
 
-import themeSettings from "@/themes/settings"
+import themeSettings from "@/backbone/settings"
 import i18nSettings from "@/i18n/settings"
 
 

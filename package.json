@@ -29,7 +29,7 @@
         "prisma": "latest",
         "react": "latest",
         "react-dom": "latest",
-        "sass": "1.75.0",
+        "sass": "latest",
         "tailwind-merge": "latest"
     },
     "devDependencies": {

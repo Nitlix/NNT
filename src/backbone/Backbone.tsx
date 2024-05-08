@@ -40,7 +40,10 @@ type SPContextType = {
     scroll: Scroll | null
     SPController: SPController
     setSPController: React.Dispatch<React.SetStateAction<SPController>>
-    parallax: NParallax | null
+    // Parallax stuff
+    getParallax: () => NParallax | null, // Get it directly
+    parallax: NParallax | null // When you want to listen
+    setParallax: React.Dispatch<React.SetStateAction<NParallax | null>>
 }
 
 type SPController = "ALLOWINIT" | "DISABLE" | "ENABLE" | "IDLE"
@@ -221,7 +224,7 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
 
     return <body className={className} data-theme={renderTheme}>
         <ThemeContext.Provider value={{ theme, setTheme }}>
-            <SPContext.Provider value={{ scroll, SPController, setSPController, parallax }}>
+            <SPContext.Provider value={{ scroll, SPController, setSPController, parallax, setParallax, getParallax }}>
                 {children}
             </SPContext.Provider>
         </ThemeContext.Provider>

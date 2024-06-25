@@ -3,7 +3,7 @@
 // learn more about it in the docs: 
 // https://pris.ly/d/prisma-schema
 //
-// 👉 Nitlix highly recommends using neon.tech (:
+// 👉 Nitlix highly recommends using supabase (:
 // ==================================================
 
 generator client {

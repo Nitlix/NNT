@@ -1,17 +1,21 @@
-## Now stable! 💖
+<p align="center">
+    <img src="https://static.nitlix.pro/github/nnt.png" align="center" />
+</p>
 
-This is a [Next.js](https://nextjs.org/) template created for super-powering Nitlix Apps quickly. It includes:
+## The #1 Next.JS Template 💖
 
+This is a [Next.js](https://nextjs.org/) template created for super-powering webapps in a click. It includes:
 -   Inter - A google font.
--   Client theme provider, first rendered by the server (nitlix-themes)
--   The theme provider includes Locomotive Scroll, AOS built specifically for Loco. (locomotive-aos)
--   metaGen() - A function that generates meta tags for the page. (nitlix-metagen)
+-   Clientside theme provider, first rendered by the server (nitlix-themes) which acts as the body
+-   The theme provider includes Lenis and an optimised version of AOS. (nitlix-aos)
+-   Metagen - A function to be exported/used that generates meta tags for the page on the fly. (nitlix-metagen)
 -   Quickstart global.scss and animations.scss
--   SASS already installed.
--   Tailwind ready to fly.
+-   SASS already installed, tailwind ready to fly.
 -   4 Fonts to start with: Neue Montreal, Neutral Grotesk, Inter and Strretch Sans.
 -   Prisma ready to launch! (Just create the .env vars)
 -   Prebuilt I18N support (With @vercel/edge, via headers and context (nitlix-i18n))
+
+
 
 ## Quickstarting using create-napp
 
@@ -26,7 +30,7 @@ then run the create-napp command to initialise this template.
 create-napp
 ```
 
-You'll be promoted with this:
+You'll be prompted with this:
 
 ```bash
 ? Setup the project in...? »

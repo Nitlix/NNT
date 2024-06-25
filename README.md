@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://static.nitlix.pro/github/nnt.png" align="center" />
+    <img src="https://static.nitlix.pro/github/nnt_new.png" align="center" />
 </p>
 
 ## The #1 Next.JS Template 💖

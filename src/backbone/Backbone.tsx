@@ -15,7 +15,7 @@ import "./Backbone.scss";
 import { setClientCookie } from "nitlix-client";
 
 // Massive props to Studio Freight for creating Lenis.
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import { ThemeRetrieverResult } from "nitlix-themes";
 import NParallax from "nparallax";
 
@@ -23,11 +23,10 @@ import NParallax from "nparallax";
 // Theme Context
 // ================================
 type ThemeContextType = {
-    theme: string,
-    setTheme: React.Dispatch<React.SetStateAction<string>>
-}
+    theme: string;
+    setTheme: React.Dispatch<React.SetStateAction<string>>;
+};
 export const ThemeContext = createContext<ThemeContextType>(null as any);
-
 
 // =================================================
 // SP Context
@@ -37,39 +36,39 @@ export const ThemeContext = createContext<ThemeContextType>(null as any);
 type Scroll = Lenis;
 
 type SPContextType = {
-    scroll: Scroll | null
-    SPController: SPController
-    setSPController: React.Dispatch<React.SetStateAction<SPController>>
+    scroll: Scroll | null;
+    SPController: SPController;
+    setSPController: React.Dispatch<React.SetStateAction<SPController>>;
     // Parallax stuff
-    getParallax: () => NParallax | null, // Get it directly
-    parallax: NParallax | null // When you want to listen
-    setParallax: React.Dispatch<React.SetStateAction<NParallax | null>>
-}
+    getParallax: () => NParallax | null; // Get it directly
+    parallax: NParallax | null; // When you want to listen
+    setParallax: React.Dispatch<React.SetStateAction<NParallax | null>>;
+};
 
-type SPController = "ALLOWINIT" | "DISABLE" | "ENABLE" | "IDLE"
-
-
+type SPController = "ALLOWINIT" | "DISABLE" | "ENABLE" | "IDLE";
 
 export const SPContext = createContext<SPContextType>(null as any);
-
-
 
 function check(theme: string, allowedThemes: string[], defaultTheme: string) {
     if (allowedThemes.includes(theme)) {
         if (theme === "system") {
             // Handle what happens when the theme is "system"
-            const system_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            const system_theme = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches
+                ? "dark"
+                : "light";
             return {
                 style: system_theme,
-                theme: "system"
-            }
+                theme: "system",
+            };
         }
 
         // Simply return the theme that's in use.
         return {
             style: theme,
-            theme: theme
-        }
+            theme: theme,
+        };
     }
 
     // Reset the theme to default
@@ -77,12 +76,18 @@ function check(theme: string, allowedThemes: string[], defaultTheme: string) {
     else {
         return {
             style: defaultTheme,
-            theme: defaultTheme
-        }
+            theme: defaultTheme,
+        };
     }
 }
 
-function applyTheme(theme: string, allowedThemes: string[], defaultTheme: string, themeCookie: string, lastThemeCookie: string) {
+function applyTheme(
+    theme: string,
+    allowedThemes: string[],
+    defaultTheme: string,
+    themeCookie: string,
+    lastThemeCookie: string
+) {
     const body = document.querySelector("body") as HTMLBodyElement;
     const parsedTheme = check(theme, allowedThemes, defaultTheme);
 
@@ -93,28 +98,28 @@ function applyTheme(theme: string, allowedThemes: string[], defaultTheme: string
     setClientCookie(lastThemeCookie, parsedTheme.style, 365);
 }
 
-
-
 type BackboneProps = {
-    children: React.ReactNode,
-    className?: string,
-    themeRetriever: ThemeRetrieverResult
-}
+    children: React.ReactNode;
+    className?: string;
+    themeRetriever: ThemeRetrieverResult;
+};
 
-
-export default function ({ children, className = "", themeRetriever }: BackboneProps) {
+export default function ({
+    children,
+    className = "",
+    themeRetriever,
+}: BackboneProps) {
     if (!themeRetriever) {
         console.error("A themeRetriever object is required.");
     }
 
     const {
-        allowedThemes = ['light', 'dark', 'system'],
-        defaultTheme = 'system',
+        allowedThemes = ["light", "dark", "system"],
+        defaultTheme = "system",
 
-        themeCookie = 'theme',
-        lastThemeCookie = 'last-theme',
+        themeCookie = "theme",
+        lastThemeCookie = "last-theme",
     } = themeRetriever.config;
-
 
     const [theme, setTheme] = useState(themeRetriever.theme);
 
@@ -127,12 +132,14 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
     // Client Side Theme Check
     //================================
     useEffect(() => {
-        applyTheme(theme, allowedThemes, defaultTheme, themeCookie, lastThemeCookie);
+        applyTheme(
+            theme,
+            allowedThemes,
+            defaultTheme,
+            themeCookie,
+            lastThemeCookie
+        );
     }, [theme]);
-
-
-
-
 
     //================================
     // SP Section
@@ -142,12 +149,10 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
     const [parallax, setParallax] = useState<NParallax | null>(null);
     const [SPController, setSPController] = useState<SPController>("ALLOWINIT");
 
-
     function onResize() {
-        if ((window.innerWidth < 1024)) {
+        if (window.innerWidth < 1024) {
             setSPController("DISABLE");
-        }
-        else {
+        } else {
             setSPController("ENABLE");
         }
     }
@@ -160,9 +165,6 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
         return parallax;
     }
 
-
-
-
     // SP Main Controller
     useEffect(() => {
         function initSP() {
@@ -171,22 +173,23 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
                     return x === 0
                         ? 0
                         : x === 1
-                            ? 1
-                            : x < 0.5 ? Math.pow(2, 20 * x - 10) / 2
-                                : (2 - Math.pow(2, -20 * x + 10)) / 2;
+                        ? 1
+                        : x < 0.5
+                        ? Math.pow(2, 20 * x - 10) / 2
+                        : (2 - Math.pow(2, -20 * x + 10)) / 2;
                 },
-                lerp: 0.15
-            })
+                lerp: 0.15,
+            });
 
             const np = new NParallax();
 
             function raf(time: number) {
-                ls.raf(time)
-                requestAnimationFrame(raf)
+                ls.raf(time);
+                requestAnimationFrame(raf);
             }
-            requestAnimationFrame(raf)
-            setScroll(ls)
-            setParallax(np)
+            requestAnimationFrame(raf);
+            setScroll(ls);
+            setParallax(np);
         }
 
         function destroySP() {
@@ -210,8 +213,8 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
 
         return () => {
             destroySP();
-        }
-    }, [SPController])
+        };
+    }, [SPController]);
 
     useEffect(() => {
         window.addEventListener("resize", onResize);
@@ -220,13 +223,22 @@ export default function ({ children, className = "", themeRetriever }: BackboneP
     // End of SP
     //==============
 
-
-
-    return <body className={className} data-theme={renderTheme}>
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-            <SPContext.Provider value={{ scroll, SPController, setSPController, parallax, setParallax, getParallax }}>
-                {children}
-            </SPContext.Provider>
-        </ThemeContext.Provider>
-    </body>
+    return (
+        <body className={className} data-theme={renderTheme}>
+            <ThemeContext.Provider value={{ theme, setTheme }}>
+                <SPContext.Provider
+                    value={{
+                        scroll,
+                        SPController,
+                        setSPController,
+                        parallax,
+                        setParallax,
+                        getParallax,
+                    }}
+                >
+                    {children}
+                </SPContext.Provider>
+            </ThemeContext.Provider>
+        </body>
+    );
 }

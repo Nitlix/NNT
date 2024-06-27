@@ -5,7 +5,7 @@ import { themeInjector } from 'nitlix-themes';
 import { signalsInjector } from 'nitlix-signals';
 
 import themeSettings from "@/backbone/settings"
-import i18nSettings from "@/i18n/settings"
+import i18nConfig from "@/i18n/config"
 
 
 export default function middleware(request: NextRequest) {
@@ -50,7 +50,7 @@ export default function middleware(request: NextRequest) {
     //====================
     // Language setting
     //====================
-    response = i18nInjector(request, i18nSettings, response).response;
+    response = i18nInjector(request, i18nConfig, response).response;
 
     //===================================
     // Return response to the renderer

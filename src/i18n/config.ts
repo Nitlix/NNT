@@ -1,4 +1,6 @@
 export default {
-    default: "en",
+    routes: {
+        default: "en",
+    },
     locales: ["en", "de"]
 }

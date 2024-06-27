@@ -13,9 +13,9 @@
     },
     "dependencies": {
         "@prisma/client": "latest",
-        "@studio-freight/lenis": "latest",
         "@vercel/edge": "latest",
         "gsap": "latest",
+        "lenis": "latest",
         "locomotive-aos": "latest",
         "locomotive-scroll": "latest",
         "next": "latest",

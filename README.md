@@ -2,7 +2,7 @@
     <img src="https://static.nitlix.pro/github/nnt_new.png" align="center" />
 </p>
 
-## The #1 Next.JS Template 💖
+## The #1 Next.JS Template 💖 - Star for a cookie
 
 This is a [Next.js](https://nextjs.org/) template created for super-powering webapps in a click. It includes:
 -   Inter - A google font.

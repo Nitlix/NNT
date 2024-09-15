@@ -2,6 +2,7 @@
 // Global CSS Imports
 // =====================
 import "./globals.scss";
+import "./animations.scss";
 
 // =====================
 // Theme CSS Imports

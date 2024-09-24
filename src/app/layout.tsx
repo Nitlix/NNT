@@ -57,7 +57,7 @@ export default function RootLayout({
                 className={NeueMontreal.className}
                 themeRetriever={themeRetriever(themeSettings)}
             >
-                {/* Feel free to remove the below if you don't with to use AOS */}
+                {/* Feel free to remove the code below if you don't wish to use AOS */}
                 <Aos />
 
                 <main className="_nitlix" data-scroll-container>

@@ -14,6 +14,7 @@
     "dependencies": {
         "@prisma/client": "latest",
         "@vercel/edge": "latest",
+        "geist": "^1.3.1",
         "gsap": "latest",
         "lenis": "latest",
         "locomotive-aos": "latest",

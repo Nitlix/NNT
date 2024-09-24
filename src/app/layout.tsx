@@ -12,13 +12,18 @@ import "@/backbone/themes.scss";
 // =====================
 // Google Font (Inter)
 // =====================
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+// import { Inter } from "next/font/google";
+// const inter = Inter({ subsets: ["latin"] });
+
+// =====================
+// Geist Font (By Vercel)
+// =====================
+import { GeistSans } from "geist/font/sans";
 
 // =====================
 // Custom Font (Neue Montreal)
 // =====================
-import NeueMontreal from "@/fonts/NeueMontreal/NeueMontreal";
+// import NeueMontreal from "@/fonts/NeueMontreal/NeueMontreal";
 
 // =====================
 // Metadata Export
@@ -54,7 +59,7 @@ export default function RootLayout({
                 />
             </head>
             <Backbone
-                className={NeueMontreal.className}
+                className={GeistSans.className}
                 themeRetriever={themeRetriever(themeSettings)}
             >
                 {/* Feel free to remove the code below if you don't wish to use AOS */}

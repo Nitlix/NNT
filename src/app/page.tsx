@@ -12,8 +12,8 @@ const pageTranslations: Translations = {
     },
 };
 
-export default function () {
-    const lang: any = getLocale();
+export default async function () {
+    const lang: any = await getLocale();
 
     return (
         <>

@@ -45,7 +45,7 @@ import Aos from "@/lib/Aos/Aos";
 // =====================
 // Layout Export
 // =====================
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
@@ -60,7 +60,7 @@ export default function RootLayout({
             </head>
             <Backbone
                 className={GeistSans.className}
-                themeRetriever={themeRetriever(themeSettings)}
+                themeRetriever={await themeRetriever(themeSettings)}
             >
                 {/* Feel free to remove the code below if you don't wish to use AOS */}
                 <Aos />

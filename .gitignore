@@ -36,3 +36,6 @@ next-env.d.ts
 
 # packagelock
 package-lock.json
+
+# deno lock
+deno.lock

@@ -19,7 +19,7 @@
         "lenis": "latest",
         "locomotive-aos": "latest",
         "locomotive-scroll": "latest",
-        "next": "^15.1.0",
+        "next": "^15.1.7",
         "nitlix": "latest",
         "nitlix-client": "latest",
         "nitlix-i18n": "^1.1.0",

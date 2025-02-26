@@ -30,7 +30,9 @@ import { GeistSans } from "geist/font/sans";
 // =====================
 import { metaGen, setDefaults } from "nitlix-metagen";
 setDefaults({
-    title: "NNT App",
+    title: "Nitlix Prebuilt App",
+    description:
+        "This is the default description for the NNT Next.JS template. Feel free to change it.",
 });
 export const metadata = metaGen();
 

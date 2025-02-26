@@ -6,7 +6,6 @@
 // Designed to superpower your app
 // silently and efficiently.
 //
-// Version 24.3.3 (Reworked 112 times)
 // with love, by Nitlix
 // ================================
 
@@ -18,6 +17,24 @@ import { setClientCookie } from "nitlix-client";
 import Lenis from "lenis";
 import { ThemeRetrieverResult } from "nitlix-themes";
 import NParallax from "nparallax";
+import { useRouter } from "next/navigation";
+import { LenisScrolltoProperties } from "@/var/types";
+
+// ================================
+// Navigation Context
+type NavigationContextType = {
+    navigating: boolean;
+    setNavigating: React.Dispatch<React.SetStateAction<boolean>>;
+    navigate: (url: string, scroll?: boolean) => void;
+    transitionActive: boolean;
+    setTransitionActive: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const NavigationContext = createContext<NavigationContextType>(
+    null as any
+);
+
+// ================================
 
 // ================================
 // Theme Context
@@ -223,22 +240,91 @@ export default function ({
     // End of SP
     //==============
 
+    //=============================================
+    // Navigation Section
+    // Feel free to edit/remove this.
+    //=============================================
+    const [navigating, setNavigating] = useState(false);
+    const [transitionActive, setTransitionActive] = useState(false);
+    const router = useRouter();
+
+    async function navigate(
+        url: string,
+        scroll = false,
+        scrolltoProperties: LenisScrolltoProperties = {}
+    ) {
+        const currentPage = window.location.pathname.split("#")[0];
+        const newPage = url.split("#")[0];
+        const newLocation = url.split("#").length > 1 ? url.split("#")[1] : "";
+
+        if (currentPage == newPage) {
+            // Refresh
+            window.location.reload();
+            return;
+        } else {
+            setNavigating(true);
+            router.push(url, {
+                scroll: false,
+            });
+
+            setTimeout(() => {
+                if (newLocation) {
+                    // Attempt to scroll
+                    if (SPController == "ENABLE" && scroll) {
+                        getScroll()?.scrollTo(newLocation, scrolltoProperties);
+                    } else {
+                        if (scroll) {
+                            // Try to get element
+                            const el = document.getElementById(
+                                newLocation.replace("#", "")
+                            );
+                            if (el) {
+                                el.scrollIntoView();
+                            } else {
+                                // Fall back to the top
+                                window.scrollTo(0, 0);
+                            }
+                        }
+                    }
+                } else {
+                    if (SPController == "ENABLE" && scroll) {
+                        getScroll()?.scrollTo(0, scrolltoProperties);
+                    } else {
+                        if (scroll) {
+                            window.scrollTo(0, 0);
+                        }
+                    }
+                }
+            }, 250);
+        }
+    }
+
     return (
         <body className={className} data-theme={renderTheme}>
-            <ThemeContext.Provider value={{ theme, setTheme }}>
-                <SPContext.Provider
-                    value={{
-                        scroll,
-                        SPController,
-                        setSPController,
-                        parallax,
-                        setParallax,
-                        getParallax,
-                    }}
-                >
-                    {children}
-                </SPContext.Provider>
-            </ThemeContext.Provider>
+            <NavigationContext.Provider
+                value={{
+                    navigating,
+                    setNavigating,
+                    navigate,
+                    transitionActive,
+                    setTransitionActive,
+                }}
+            >
+                <ThemeContext.Provider value={{ theme, setTheme }}>
+                    <SPContext.Provider
+                        value={{
+                            scroll,
+                            SPController,
+                            setSPController,
+                            parallax,
+                            setParallax,
+                            getParallax,
+                        }}
+                    >
+                        {children}
+                    </SPContext.Provider>
+                </ThemeContext.Provider>
+            </NavigationContext.Provider>
         </body>
     );
 }

@@ -41,7 +41,7 @@ export const metadata = metaGen();
 // =====================
 import { themeRetriever } from "nitlix-themes";
 import Backbone from "@/backbone/Backbone";
-import themeSettings from "@/backbone/settings";
+import { themeConfig } from "@/backbone/configs";
 import Aos from "@/lib/Aos/Aos";
 
 // =====================
@@ -62,7 +62,7 @@ export default async function RootLayout({
             </head>
             <Backbone
                 className={GeistSans.className}
-                themeRetriever={await themeRetriever(themeSettings)}
+                themeRetriever={await themeRetriever(themeConfig)}
             >
                 {/* Feel free to remove the code below if you don't wish to use AOS */}
                 <Aos />

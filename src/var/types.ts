@@ -25,3 +25,6 @@ export type LenisScrolltoProperties = {
     programmatic?: boolean;
     userData?: object;
 };
+
+export type ThemeStyle = "dark" | "light";
+export type ThemeTheme = ThemeStyle | "system";

@@ -15,7 +15,12 @@ import { setClientCookie } from "nitlix-client";
 
 // Massive props to Studio Freight for creating Lenis.
 import Lenis from "lenis";
-import { ThemeRetrieverResult } from "nitlix-themes";
+import {
+    ThemeRetrieverResult,
+    configParser as themeConfigParser,
+    Theme,
+    Style,
+} from "nitlix-themes";
 import NParallax from "nparallax";
 import { useRouter } from "next/navigation";
 import { LenisScrolltoProperties } from "@/var/types";
@@ -39,9 +44,11 @@ export const NavigationContext = createContext<NavigationContextType>(
 // ================================
 // Theme Context
 // ================================
+
 type ThemeContextType = {
-    theme: string;
-    setTheme: React.Dispatch<React.SetStateAction<string>>;
+    style: Style;
+    theme: Theme;
+    setTheme: (theme: Theme) => void;
 };
 export const ThemeContext = createContext<ThemeContextType>(null as any);
 
@@ -66,7 +73,15 @@ type SPController = "ALLOWINIT" | "DISABLE" | "ENABLE" | "IDLE";
 
 export const SPContext = createContext<SPContextType>(null as any);
 
-function check(theme: string, allowedThemes: string[], defaultTheme: string) {
+function check(
+    theme: Theme,
+    allowedThemes: Theme[],
+    defaultTheme: Theme,
+    defaultStyle: Style
+): {
+    style: Style;
+    theme: Theme;
+} {
     if (allowedThemes.includes(theme)) {
         if (theme === "system") {
             // Handle what happens when the theme is "system"
@@ -76,14 +91,14 @@ function check(theme: string, allowedThemes: string[], defaultTheme: string) {
                 ? "dark"
                 : "light";
             return {
-                style: system_theme,
+                style: system_theme as Style,
                 theme: "system",
             };
         }
 
         // Simply return the theme that's in use.
         return {
-            style: theme,
+            style: theme as Style,
             theme: theme,
         };
     }
@@ -92,27 +107,10 @@ function check(theme: string, allowedThemes: string[], defaultTheme: string) {
     // if not allowed.
     else {
         return {
-            style: defaultTheme,
+            style: defaultStyle,
             theme: defaultTheme,
         };
     }
-}
-
-function applyTheme(
-    theme: string,
-    allowedThemes: string[],
-    defaultTheme: string,
-    themeCookie: string,
-    lastThemeCookie: string
-) {
-    const body = document.querySelector("body") as HTMLBodyElement;
-    const parsedTheme = check(theme, allowedThemes, defaultTheme);
-
-    // Set the theme using the "data-theme" attribute.
-    body.setAttribute("data-theme", parsedTheme.style);
-
-    setClientCookie(themeCookie, parsedTheme.theme, 365);
-    setClientCookie(lastThemeCookie, parsedTheme.style, 365);
 }
 
 type BackboneProps = {
@@ -130,17 +128,36 @@ export default function ({
         console.error("A themeRetriever object is required.");
     }
 
-    const {
-        allowedThemes = ["light", "dark", "system"],
-        defaultTheme = "system",
+    function applyTheme(
+        theme: Theme,
+        allowedThemes: Theme[],
+        defaultTheme: Theme,
+        defaultStyle: Style,
+        themeCookie: string,
+        lastStyleCookie: string
+    ) {
+        const body = document.querySelector("body") as HTMLBodyElement;
+        const parsedTheme = check(
+            theme,
+            allowedThemes,
+            defaultTheme,
+            defaultStyle
+        );
 
-        themeCookie = "theme",
-        lastThemeCookie = "last-theme",
-    } = themeRetriever.config;
+        // Set the theme using the "data-theme" attribute.
+        body.setAttribute("data-theme", parsedTheme.style);
+        setStyle(parsedTheme.style);
 
-    const [theme, setTheme] = useState(themeRetriever.theme);
+        setClientCookie(themeCookie, parsedTheme.theme, 365);
+        setClientCookie(lastStyleCookie, parsedTheme.style, 365);
+    }
 
-    let renderTheme = themeRetriever.lastTheme;
+    const themeConfig = themeConfigParser(themeRetriever.config);
+
+    const [theme, setTheme] = useState<Theme>(themeRetriever.theme);
+    const [style, setStyle] = useState<Style>(themeRetriever.lastStyle);
+
+    let renderTheme = themeRetriever.lastStyle;
     if (theme != "system") {
         renderTheme = theme;
     }
@@ -151,10 +168,11 @@ export default function ({
     useEffect(() => {
         applyTheme(
             theme,
-            allowedThemes,
-            defaultTheme,
-            themeCookie,
-            lastThemeCookie
+            themeConfig.allowedThemes,
+            themeConfig.defaultTheme,
+            themeConfig.defaultStyle,
+            themeConfig.themeCookie,
+            themeConfig.lastStyleCookie
         );
     }, [theme]);
 
@@ -310,7 +328,7 @@ export default function ({
                     setTransitionActive,
                 }}
             >
-                <ThemeContext.Provider value={{ theme, setTheme }}>
+                <ThemeContext.Provider value={{ theme, style, setTheme }}>
                     <SPContext.Provider
                         value={{
                             scroll,

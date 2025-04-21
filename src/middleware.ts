@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
-import { i18nInjector } from 'nitlix-i18n';
-import { themeInjector } from 'nitlix-themes';
-import { signalsInjector } from 'nitlix-signals';
+import { i18nInjector } from "nitlix-i18n";
+import { themeInjector } from "nitlix-themes";
+import { signalsInjector } from "nitlix-signals";
 
-import themeSettings from "@/backbone/settings"
-import i18nConfig from "@/i18n/config"
+import { themeConfig } from "@/backbone/configs";
 
+import i18nConfig from "@/i18n/config";
 
 export default function middleware(request: NextRequest) {
     // =================================
@@ -16,13 +16,13 @@ export default function middleware(request: NextRequest) {
         request: {
             // Apply old headers
             headers: request.headers,
-        }
-    })
+        },
+    });
 
     // =================================
     // Define interaction functions
     // =================================
-    function setHeader(name: string, value: string){
+    function setHeader(name: string, value: string) {
         response.headers.set(name, value);
         request.headers.set(name, value);
     }
@@ -32,20 +32,15 @@ export default function middleware(request: NextRequest) {
     //==================================================
     setHeader("x-url", request.url);
 
-
     //================================
     // Inject signals
     //================================
     response = signalsInjector(request, response).response;
 
-    
-
     //================================
     // Inject the theme cookies
     //================================
-    response = themeInjector(request, themeSettings, response).response;
-
-    
+    response = themeInjector(request, themeConfig, response).response;
 
     //====================
     // Language setting

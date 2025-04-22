@@ -3,14 +3,21 @@
 @tailwind utilities;
 
 :root {
-    --spacing: 5rem;
+    --spacing: 7rem;
     --letter-spacing-multiplier: -0.025;
 
     --transition: 0.5s ease-in-out;
+
+    @media (width < 1000px) {
+        --spacing: 5rem;
+        @media (width < 800px) {
+            --spacing: 1rem;
+        }
+    }
 }
 
 * {
-    transition: var(--transition);
+    // transition: var(--transition);
     @apply m-0 p-0 box-border;
 }
 
@@ -26,7 +33,7 @@ body {
     @apply text-black bg-white grid place-items-center;
 }
 
-body[data-theme="dark"] {
+[data-theme="dark"] body{
     @apply bg-black text-white;
 }
 
@@ -39,23 +46,23 @@ h5 {
 }
 
 h1 {
-    @apply font-[800] text-[4rem] tracking-tighter;
+    @apply font-[600] text-[4rem] tracking-tighter;
 }
 
 h2 {
-    @apply font-bold text-[3rem] tracking-tight;
+    @apply font-[600] text-[3rem] tracking-tighter;
 }
 
 h3 {
-    @apply font-bold text-[2rem] tracking-tight;
+    @apply font-[600] text-[2rem] tracking-tighter;
 }
 
 h4 {
-    @apply font-bold text-[1.5rem] tracking-tight;
+    @apply font-[600] text-[1.5rem] tracking-tight;
 }
 
 h5 {
-    @apply font-bold text-[1.25rem] tracking-tight;
+    @apply font-[600] text-[1.25rem] tracking-tight;
 }
 
 p {

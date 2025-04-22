@@ -4,18 +4,18 @@
 
 ## The #1 Next.JS Template 💖 - Star for a cookie 🍪
 
-This is a [Next.js](https://nextjs.org/) template created for super-powering webapps in a click. It includes:
--   Inter - A google font.
--   Clientside theme provider, first rendered by the server (nitlix-themes) which acts as the body
--   The theme provider includes Lenis and an optimised version of AOS. (nitlix-aos)
+This is a [Next.js](https://nextjs.org/) template created for scaffolding web apps for production in a click. It includes:
+
+-   Geist font.
+-   Theme provider by next-themes
+-   Lenis built-in and an optimised version of AOS. (nitlix-aos)
+-   A Navigation manager and provider (for page transitions) with AutoScroll via Lenis.
 -   Metagen - A function to be exported/used that generates meta tags for the page on the fly. (nitlix-metagen)
 -   Quickstart global.scss and animations.scss
 -   SASS already installed, tailwind ready to fly.
 -   4 Fonts to start with: Neue Montreal, Neutral Grotesk, Inter and Strretch Sans.
 -   Prisma ready to launch! (Just create the .env vars)
--   Prebuilt I18N support (With @vercel/edge, via headers and context (nitlix-i18n))
-
-
+-   Prebuilt I18N support via automatic management in the middleware.
 
 ## Quickstarting using create-napp
 
@@ -51,14 +51,14 @@ gh repo clone Nitlix/NitlixNextTemplate .
 ### Option 2: Folder does not exist
 
 ```bash
-gh repo clone Nitlix/NitlixNextTemplate <folder-name>
+gh repo clone Nitlix/NNT <folder-name>
 # the folder name is optional
 ```
 
 ### Option 3: Forking
 
 ```bash
-gh repo fork Nitlix/NitlixNextTemplate
+gh repo fork Nitlix/NNT
 ```
 
 ## Getting Started

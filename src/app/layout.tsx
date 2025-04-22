@@ -39,11 +39,9 @@ export const metadata = metaGen();
 // =====================
 // Theme Provider
 // =====================
-import { themeRetriever } from "nitlix-themes";
 import Backbone from "@/backbone/Backbone";
-import { themeConfig } from "@/backbone/configs";
 import Aos from "@/lib/Aos/Aos";
-
+import { ThemeProvider } from "next-themes";
 // =====================
 // Layout Export
 // =====================
@@ -53,23 +51,15 @@ export default async function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-            <head>
-                <link
-                    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-                    rel="stylesheet"
-                />
-            </head>
-            <Backbone
-                className={GeistSans.className}
-                themeRetriever={await themeRetriever(themeConfig)}
-            >
+        <html lang="en" suppressHydrationWarning>
+            <Backbone className={GeistSans.className}>
                 {/* Feel free to remove the code below if you don't wish to use AOS */}
                 <Aos />
-
-                <main className="_nitlix" data-scroll-container>
-                    {children}
-                </main>
+                <ThemeProvider defaultTheme="system">
+                    <main className="_nitlix" data-scroll-container>
+                        {children}
+                    </main>
+                </ThemeProvider>
             </Backbone>
         </html>
     );

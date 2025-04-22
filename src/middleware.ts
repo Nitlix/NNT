@@ -1,12 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { i18nInjector } from "nitlix-i18n";
-import { themeInjector } from "nitlix-themes";
 import { signalsInjector } from "nitlix-signals";
 
-import { themeConfig } from "@/backbone/configs";
+const locales = ["en", "de"];
+const defaultLocale = "en";
 
-import i18nConfig from "@/i18n/config";
+// Get the preferred locale, similar to the above or using a library
+function getLocale(request: NextRequest) {
+    // Get the locale from the request headers or use a default
+    const acceptLanguage =
+        request.headers.get("accept-language") || defaultLocale;
+
+    const languages = acceptLanguage.split(",").map((lang) => {
+        const [locale] = lang.split(";");
+        return locale.split("-")[0].toLowerCase();
+    });
+
+    const matchedLocale =
+        languages.find((lang) => locales.includes(lang)) || defaultLocale;
+
+    return matchedLocale || defaultLocale;
+}
 
 export default function middleware(request: NextRequest) {
     // =================================
@@ -37,24 +51,26 @@ export default function middleware(request: NextRequest) {
     //================================
     response = signalsInjector(request, response).response;
 
-    //================================
-    // Inject the theme cookies
-    //================================
-    response = themeInjector(request, themeConfig, response).response;
-
     //====================
     // Language setting
     //====================
-    response = i18nInjector(request, i18nConfig, response).response;
+    const { pathname } = request.nextUrl;
+    const pathnameHasLocale = locales.some(
+        (locale) =>
+            pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    );
 
-    //===================================
-    // Return response to the renderer
-    // It'll handle it from here
-    //===================================
-    return response;
+    if (pathnameHasLocale) return response;
+
+    // Redirect if there is no locale
+    const locale = getLocale(request);
+    request.nextUrl.pathname = `/${locale}${pathname}`;
+    // e.g. incoming request is /products
+    // The new URL is now /en-US/products
+    return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
     // matcher solution for public, api, assets and _next exclusion
-    matcher: "/((?!api|static|.*\\..*|_next).*)",
+    matcher: ["/((?!_next|assets|favicon\\.ico|api/).*)"],
 };

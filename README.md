@@ -45,7 +45,7 @@ To initialise this template, choose one of the following options:
 ### Option 1: Folder already exists
 
 ```bash
-gh repo clone Nitlix/NitlixNextTemplate .
+gh repo clone Nitlix/NNT .
 ```
 
 ### Option 2: Folder does not exist
